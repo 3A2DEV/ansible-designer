@@ -1,0 +1,13 @@
+---
+# vars/main.yml — Internal constants for the nginx role (RHEL)
+# These values are not intended to be overridden by operators.
+# OS-specific package/service names belong here.
+
+nginx_package: nginx
+nginx_service_name: nginx
+nginx_config_dir: /etc/nginx
+nginx_log_dir: /var/log/nginx
+nginx_pid_file: /run/nginx.pid
+nginx_user: nginx
+nginx_group: nginx
+nginx_mime_types_file: /etc/nginx/mime.types

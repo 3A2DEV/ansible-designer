@@ -1,0 +1,41 @@
+---
+# tasks/RedHat.yml — NTP configuration for RHEL 8/9 using chrony
+
+- name: Install chrony package (RHEL)
+  ansible.builtin.dnf:
+    name: "{{ ntp_package }}"
+    state: present
+  tags:
+    - ntp
+    - install
+
+- name: Deploy chrony configuration (RHEL)
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: "{{ ntp_config_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart chrony
+  tags:
+    - ntp
+    - configure
+
+- name: Ensure chronyd is started and enabled (RHEL)
+  ansible.builtin.systemd:
+    name: "{{ ntp_service_name }}"
+    state: started
+    enabled: true
+  tags:
+    - ntp
+    - service
+
+- name: Verify chrony is synchronized (RHEL)
+  ansible.builtin.command:
+    cmd: chronyc tracking
+  register: chrony_tracking
+  changed_when: false
+  failed_when: "'Leap status     : Normal' not in chrony_tracking.stdout and 'Not synchronised' in chrony_tracking.stdout"
+  tags:
+    - ntp
+    - validate

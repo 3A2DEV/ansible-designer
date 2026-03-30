@@ -1,0 +1,16 @@
+---
+# group_vars/webservers.yml — Variables for webservers group
+
+nginx_port: 80
+nginx_worker_processes: "{{ ansible_processor_vcpus }}"
+nginx_client_max_body_size: "20m"
+nginx_keepalive_timeout: 65
+nginx_enable_ssl: false
+nginx_log_dir: /var/log/nginx
+
+# Application settings served by nginx
+app_listen_port: 8080
+app_static_dir: /var/www/html
+
+# Reference vault-encrypted value
+nginx_ssl_key_passphrase: "{{ vault_nginx_ssl_key_passphrase | default('') }}"

@@ -1,0 +1,66 @@
+---
+# tasks/Solaris.yml — NTP configuration for Oracle Solaris 11 using SMF and xntpd
+
+- name: Check if NTP package is installed (Solaris)
+  ansible.builtin.command:
+    cmd: "pkg info {{ ntp_package }}"
+  register: pkg_info_result
+  changed_when: false
+  failed_when: false
+  tags:
+    - ntp
+    - install
+
+- name: Install NTP package (Solaris)
+  ansible.builtin.command:
+    cmd: "pkg install {{ ntp_package }}"
+  when: pkg_info_result.rc != 0
+  tags:
+    - ntp
+    - install
+
+- name: Deploy NTP configuration (Solaris)
+  ansible.builtin.template:
+    src: ntp.conf.j2
+    dest: "{{ ntp_config_path }}"
+    owner: root
+    group: sys
+    mode: "0644"
+  tags:
+    - ntp
+    - configure
+
+- name: Check current SMF service state (Solaris)
+  ansible.builtin.command:
+    cmd: "svcs -H -o state {{ ntp_smf_fmri }}"
+  register: smf_state
+  changed_when: false
+  failed_when: false
+  tags:
+    - ntp
+    - service
+
+- name: Enable NTP SMF service (Solaris)
+  ansible.builtin.command:
+    cmd: "svcadm enable -s {{ ntp_smf_fmri }}"
+  when: smf_state.stdout is not defined or smf_state.stdout.strip() not in ['online', 'degraded']
+  tags:
+    - ntp
+    - service
+
+- name: Restart NTP SMF service to apply config (Solaris)
+  ansible.builtin.command:
+    cmd: "svcadm restart {{ ntp_smf_fmri }}"
+  tags:
+    - ntp
+    - service
+
+- name: Verify NTP SMF service is online (Solaris)
+  ansible.builtin.command:
+    cmd: "svcs -H -o state {{ ntp_smf_fmri }}"
+  register: smf_final_state
+  failed_when: smf_final_state.stdout.strip() != 'online'
+  changed_when: false
+  tags:
+    - ntp
+    - validate

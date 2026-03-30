@@ -1,0 +1,48 @@
+---
+# tasks/Windows.yml — NTP configuration for Windows Server using w32tm
+
+- name: Ensure Windows Time service is running
+  ansible.windows.win_service:
+    name: "{{ ntp_service_name }}"
+    start_mode: auto
+    state: started
+  tags:
+    - ntp
+    - service
+
+- name: Configure NTP servers via w32tm (Windows)
+  ansible.windows.win_shell: |
+    w32tm /config /manualpeerlist:"{{ ntp_servers | join(' ') }}" /syncfromflags:manual /reliable:yes /update
+  register: w32tm_config
+  changed_when: "'The command completed successfully' in w32tm_config.stdout"
+  tags:
+    - ntp
+    - configure
+
+- name: Restart Windows Time service to apply configuration
+  ansible.windows.win_service:
+    name: "{{ ntp_service_name }}"
+    state: restarted
+  tags:
+    - ntp
+    - service
+
+- name: Force time synchronization (Windows)
+  ansible.windows.win_shell: |
+    w32tm /resync /force
+  register: w32tm_resync
+  changed_when: false
+  failed_when: w32tm_resync.rc != 0 and 'The operation completed successfully' not in w32tm_resync.stdout
+  tags:
+    - ntp
+    - validate
+
+- name: Verify time source is configured (Windows)
+  ansible.windows.win_shell: |
+    w32tm /query /source
+  register: w32tm_source
+  changed_when: false
+  failed_when: w32tm_source.stdout.strip() == 'Local CMOS Clock'
+  tags:
+    - ntp
+    - validate

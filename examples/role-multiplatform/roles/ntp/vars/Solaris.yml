@@ -1,0 +1,7 @@
+---
+# vars/Solaris.yml — Oracle Solaris 11 NTP variables
+ntp_package: service/network/ntp
+ntp_smf_fmri: svc:/network/ntp:default
+ntp_config_path: /etc/inet/ntp.conf
+ntp_drift_file: /var/ntp/ntp.drift
+ntp_log_dir: /var/log/ntp
