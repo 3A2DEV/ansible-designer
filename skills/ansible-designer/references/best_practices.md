@@ -46,11 +46,29 @@ This document is the authoritative runtime reference for ansible-designer. All g
 | `pause` | `ansible.builtin.pause` |
 | `cron` | `ansible.builtin.cron` |
 | `mount` | `ansible.builtin.mount` |
-| `sysctl` | `ansible.builtin.sysctl` |
+| `unarchive` | `ansible.builtin.unarchive` |
+| `fetch` | `ansible.builtin.fetch` |
+| `slurp` | `ansible.builtin.slurp` |
+| `tempfile` | `ansible.builtin.tempfile` |
+| `hostname` | `ansible.builtin.hostname` |
+| `reboot` | `ansible.builtin.reboot` |
+| `wait_for_connection` | `ansible.builtin.wait_for_connection` |
+| `add_host` | `ansible.builtin.add_host` |
+| `group_by` | `ansible.builtin.group_by` |
+| `git` | `ansible.builtin.git` |
+| `pip` | `ansible.builtin.pip` |
+| `known_hosts` | `ansible.builtin.known_hosts` |
+| `include_role` | `ansible.builtin.include_role` |
+| `import_role` | `ansible.builtin.import_role` |
+| `rpm_key` | `ansible.builtin.rpm_key` |
 | `firewalld` | `ansible.posix.firewalld` |
 | `synchronize` | `ansible.posix.synchronize` |
 | `seboolean` | `ansible.posix.seboolean` |
 | `selinux` | `ansible.posix.selinux` |
+| `sysctl` | `ansible.posix.sysctl` |
+| `authorized_key` | `ansible.posix.authorized_key` |
+| `acl` | `ansible.posix.acl` |
+| `patch` | `ansible.posix.patch` |
 | `win_copy` | `ansible.windows.win_copy` |
 | `win_command` | `ansible.windows.win_command` |
 | `win_shell` | `ansible.windows.win_shell` |
@@ -63,7 +81,34 @@ This document is the authoritative runtime reference for ansible-designer. All g
 | `win_regedit` | `ansible.windows.win_regedit` |
 | `win_stat` | `ansible.windows.win_stat` |
 
-### Third-party collections
+### community.general — system and infrastructure modules
+
+`community.general` must be installed separately (`ansible-galaxy collection install community.general`). These are among the most commonly needed modules in enterprise infrastructure work:
+
+| Short name | FQCN |
+|------------|------|
+| `ini_file` | `community.general.ini_file` |
+| `pam_limits` | `community.general.pam_limits` |
+| `alternatives` | `community.general.alternatives` |
+| `timezone` | `community.general.timezone` |
+| `modprobe` | `community.general.modprobe` |
+| `nmcli` | `community.general.nmcli` |
+| `ufw` | `community.general.ufw` |
+| `git_config` | `community.general.git_config` |
+| `mail` | `community.general.mail` |
+| `make` | `community.general.make` |
+| `npm` | `community.general.npm` |
+| `snap` | `community.general.snap` |
+| `archive` | `community.general.archive` |
+| `htpasswd` | `community.general.htpasswd` |
+| `java_keystore` | `community.general.java_keystore` |
+| `locale_gen` | `community.general.locale_gen` |
+| `supervisorctl` | `community.general.supervisorctl` |
+| `redhat_subscription` | `community.general.redhat_subscription` |
+| `rhsm_repository` | `community.general.rhsm_repository` |
+| `yum_versionlock` | `community.general.yum_versionlock` |
+
+### Other third-party collections
 
 | Module | FQCN |
 |--------|------|
