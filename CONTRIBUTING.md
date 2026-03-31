@@ -41,8 +41,8 @@ Every `SKILL.md` must have valid YAML frontmatter:
 
 ```yaml
 ---
-name: ansible-designer-<subcommand>    # kebab-case, max 64 characters
-description: <under 1024 characters, no angle brackets>
+name: ansible-designer-new-role        # kebab-case, max 64 characters
+description: "Scaffold a new Ansible role. Triggered by /ansible-designer:new-role."
 ---
 ```
 
@@ -129,27 +129,41 @@ All Ansible YAML (tasks, playbooks, roles, examples) must follow:
 
 ## Testing Skill Changes
 
-### Validate SKILL.md frontmatter
+Two validation scripts in `scripts/` cover what CI checks. Run them locally before opening a PR.
+
+### Install the dependency
 
 ```bash
-python3 -c "
-import yaml, sys, pathlib
-for f in pathlib.Path('skills').rglob('SKILL.md'):
-    content = f.read_text()
-    if content.startswith('---'):
-        front = content.split('---')[1]
-        try:
-            data = yaml.safe_load(front)
-            name = data.get('name', '')
-            desc = data.get('description', '')
-            assert len(name) <= 64, f'name too long: {name}'
-            assert len(desc) <= 1024, f'description too long'
-            assert '<' not in desc and '>' not in desc, 'angle brackets in description'
-            print(f'OK: {f}')
-        except Exception as e:
-            print(f'FAIL: {f}: {e}')
-            sys.exit(1)
-"
+pip install pyyaml
+# macOS (PEP 668): use a venv instead
+python3 -m venv /tmp/ad-venv && /tmp/ad-venv/bin/pip install pyyaml
+```
+
+### Validate SKILL.md frontmatter
+
+Checks `name` (kebab-case, max 64 chars) and `description` (max 1024 chars, no angle brackets) for every `SKILL.md` under `skills/`.
+
+```bash
+# All files
+python3 scripts/validate_frontmatter.py
+
+# Specific files only (useful when working on one sub-skill)
+python3 scripts/validate_frontmatter.py skills/ansible-designer/new-role/SKILL.md
+```
+
+### Validate skill and example structure
+
+Discovery-based — no hardcoded file lists. Checks:
+- Every subdirectory of `skills/ansible-designer/` (except `references/`) has a `SKILL.md`
+- Every `.md` file in `references/` is non-empty
+- Every directory in `examples/` has a `README.md`
+
+```bash
+# All directories
+python3 scripts/validate_structure.py
+
+# Scoped to changed paths (mirrors what CI does on PRs)
+python3 scripts/validate_structure.py --changed skills/ansible-designer/new-role/SKILL.md
 ```
 
 ### Validate examples with ansible-lint
@@ -157,34 +171,6 @@ for f in pathlib.Path('skills').rglob('SKILL.md'):
 ```bash
 pip install ansible-lint
 ansible-lint examples/
-```
-
-### Check all expected files exist
-
-```bash
-for f in \
-  "skills/ansible-designer/SKILL.md" \
-  "skills/ansible-designer/new-playbook/SKILL.md" \
-  "skills/ansible-designer/review-playbook/SKILL.md" \
-  "skills/ansible-designer/update-playbook/SKILL.md" \
-  "skills/ansible-designer/new-role/SKILL.md" \
-  "skills/ansible-designer/review-role/SKILL.md" \
-  "skills/ansible-designer/update-role/SKILL.md" \
-  "skills/ansible-designer/new-collection/SKILL.md" \
-  "skills/ansible-designer/review-collection/SKILL.md" \
-  "skills/ansible-designer/update-collection/SKILL.md" \
-  "skills/ansible-designer/new-conf/SKILL.md" \
-  "skills/ansible-designer/review-conf/SKILL.md" \
-  "skills/ansible-designer/update-conf/SKILL.md" \
-  "skills/ansible-designer/references/discovery.md" \
-  "skills/ansible-designer/references/best_practices.md" \
-  "skills/ansible-designer/references/playbook.md" \
-  "skills/ansible-designer/references/role.md" \
-  "skills/ansible-designer/references/collection.md" \
-  "skills/ansible-designer/references/inventory.md" \
-  "skills/ansible-designer/references/ansible_cfg.md"; do
-  [ -f "$f" ] && echo "OK: $f" || echo "MISSING: $f"
-done
 ```
 
 ---
