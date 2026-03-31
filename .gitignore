@@ -6,3 +6,4 @@ CLAUDE.md
 
 ## env
 .ansible/
+.DS_Store
