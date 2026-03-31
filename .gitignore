@@ -1,8 +1,12 @@
-## code
+## code file
 PROJECT.md
 AGENTS.md
 CLAUDE.md
+QWEN.md
+
+## code path
 .claude/
+.qwen/
 
 ## env
 .ansible/
