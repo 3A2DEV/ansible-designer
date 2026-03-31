@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-update-conf
+name: update-conf
 description: Update an existing ansible.cfg. Triggered by /ansible-designer:update-conf. Reads the current config, applies the requested section or key changes, shows a unified diff, waits for explicit user confirmation, then writes. Never overwrites silently. Adds justification comments for security-sensitive settings.
 ---
 

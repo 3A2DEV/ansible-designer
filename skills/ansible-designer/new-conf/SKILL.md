@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-new-conf
+name: new-conf
 description: Generate an annotated ansible.cfg for a specific environment. Triggered by /ansible-designer:new-conf. Asks for target environment (dev, CI, or AWX) and generates a fully annotated ansible.cfg covering all official sections including defaults, privilege escalation, SSH connection, vault config, callback plugins, and fact caching. Shows summary before writing.
 ---
 

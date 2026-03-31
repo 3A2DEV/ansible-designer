@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-review-playbook
+name: review-playbook
 description: Review an existing Ansible playbook and produce a structured severity report grouped by CRITICAL, WARNING, and INFO. Triggered by /ansible-designer:review-playbook. Checks FQCN usage, idempotency patterns, no_log on secret tasks, tag coverage, deprecated syntax, become usage, and style consistency. NEVER modifies files.
 ---
 

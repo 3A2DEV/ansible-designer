@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-review-role
+name: review-role
 description: Review an existing Ansible role and produce a structured severity report grouped by CRITICAL, WARNING, and INFO. Triggered by /ansible-designer:review-role. Checks directory structure completeness, task FQCN, tag coverage, no_log on secret tasks, defaults vs vars usage, meta/main.yml validity, and handler correctness. NEVER modifies files.
 ---
 

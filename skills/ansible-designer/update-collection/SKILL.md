@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-update-collection
+name: update-collection
 description: Update an existing Ansible collection. Triggered by /ansible-designer:update-collection. Supports updating galaxy.yml metadata, adding roles or plugins, bumping version, and updating CHANGELOG. Shows a unified diff per file before writing and waits for explicit user confirmation.
 ---
 

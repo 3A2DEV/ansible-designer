@@ -1,5 +1,5 @@
 ---
-name: ansible-designer-review-conf
+name: review-conf
 description: Review an ansible.cfg and produce a structured severity report grouped by CRITICAL, WARNING, and INFO. Triggered by /ansible-designer:review-conf. Checks for deprecated settings, insecure values, missing critical sections, and vault misconfiguration. NEVER modifies files.
 ---
 
