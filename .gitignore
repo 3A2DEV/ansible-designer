@@ -3,3 +3,6 @@ PROJECT.md
 AGENTS.md
 CLAUDE.md
 .claude/
+
+## env
+.ansible/

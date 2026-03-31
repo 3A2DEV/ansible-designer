@@ -1,0 +1,11 @@
+# chrony.conf — managed by Ansible (ntp role)
+# DO NOT EDIT MANUALLY
+
+{% for server in ntp_servers %}
+server {{ server }} iburst
+{% endfor %}
+
+driftfile {{ ntp_drift_file }}
+logdir {{ ntp_log_dir }}
+makestep 1.0 3
+rtcsync

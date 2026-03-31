@@ -1,0 +1,57 @@
+---
+# site.yml — local-collection example
+# Demonstrates: consuming a locally-developed collection via collections_path,
+#               FQCN module reference, and baseline role invocation.
+#
+# Prerequisites:
+#   ansible.cfg must contain:
+#     [defaults]
+#     collections_path = ./collections
+#
+# Usage:
+#   ansible-playbook -i inventory/hosts.yml site.yml
+#   ansible-playbook -i inventory/hosts.yml site.yml -t baseline,validate
+
+- name: Apply baseline configuration to RHEL servers
+  hosts: rhel_servers
+  gather_facts: true
+  become: true
+  become_method: ansible.builtin.sudo
+
+  collections:
+    - myorg.infra
+
+  vars:
+    baseline_manage_firewall: false
+
+  pre_tasks:
+    - name: Validate sysctl policy before applying changes
+      myorg.infra.sysctl_validate:
+        policy_file: "{{ playbook_dir }}/files/sysctl_policy.yml"
+        fail_on_violation: false
+      register: pre_sysctl_check
+      tags:
+        - baseline
+        - validate
+
+    - name: Report pre-run sysctl violations
+      ansible.builtin.debug:
+        msg: "Pre-run violations: {{ pre_sysctl_check.violations | length }}"
+      when: not pre_sysctl_check.compliant
+      tags:
+        - baseline
+        - validate
+
+  roles:
+    - role: myorg.infra.baseline
+      tags:
+        - baseline
+
+  post_tasks:
+    - name: Validate sysctl policy after applying changes
+      myorg.infra.sysctl_validate:
+        policy_file: "{{ playbook_dir }}/files/sysctl_policy.yml"
+        fail_on_violation: true
+      tags:
+        - baseline
+        - validate

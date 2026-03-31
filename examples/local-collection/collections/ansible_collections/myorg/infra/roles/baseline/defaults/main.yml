@@ -1,0 +1,30 @@
+---
+# defaults/main.yml — baseline role defaults
+
+baseline_packages:
+  - vim-enhanced
+  - tmux
+  - curl
+  - lsof
+  - net-tools
+  - bind-utils
+
+baseline_sysctl:
+  net.ipv4.ip_forward: 0
+  net.ipv4.conf.all.rp_filter: 1
+  net.ipv4.conf.default.rp_filter: 1
+  kernel.dmesg_restrict: 1
+  fs.suid_dumpable: 0
+
+baseline_limits:
+  - domain: "*"
+    type: soft
+    item: nofile
+    value: 65536
+  - domain: "*"
+    type: hard
+    item: nofile
+    value: 65536
+
+baseline_manage_limits: true
+baseline_manage_sysctl: true

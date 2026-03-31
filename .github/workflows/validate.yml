@@ -1,0 +1,53 @@
+---
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Skill validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Fetch enough history to diff against the base branch on PRs
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Collect changed files (PR only)
+        id: changed
+        if: github.event_name == 'pull_request'
+        run: |
+          files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "Changed files:"
+          echo "$files"
+          # Newline-separated list → space-separated for use as CLI args
+          echo "list=$(echo "$files" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Validate SKILL.md frontmatter (all files)
+        if: github.event_name == 'push'
+        run: python3 scripts/validate_frontmatter.py
+
+      - name: Validate SKILL.md frontmatter (changed files)
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/validate_frontmatter.py ${{ steps.changed.outputs.list }}
+
+      - name: Validate structure (all)
+        if: github.event_name == 'push'
+        run: python3 scripts/validate_structure.py
+
+      - name: Validate structure (changed files)
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/validate_structure.py --changed ${{ steps.changed.outputs.list }}

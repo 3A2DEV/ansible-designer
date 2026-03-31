@@ -1,0 +1,7 @@
+---
+# vars/Windows.yml — Windows NTP (W32tm) variables
+ntp_service_name: W32Time
+ntp_servers:
+  - time.windows.com
+ntp_type: NTP
+ntp_enabled: true

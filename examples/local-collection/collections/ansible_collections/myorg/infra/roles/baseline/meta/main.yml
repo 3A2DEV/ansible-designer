@@ -1,0 +1,24 @@
+---
+# meta/main.yml — baseline role metadata
+
+galaxy_info:
+  role_name: baseline
+  author: platform-team
+  description: "Common baseline configuration for RHEL 8/9 servers: sysctl hardening, limits, and packages"
+  company: "MyOrg"
+  license: Apache-2.0
+  min_ansible_version: "2.15"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+
+  galaxy_tags:
+    - baseline
+    - rhel
+    - hardening
+    - sysctl
+
+dependencies: []

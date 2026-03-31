@@ -1,0 +1,22 @@
+---
+# handlers/main.yml — NTP role handlers
+
+- name: Restart ntp service
+  ansible.builtin.service:
+    name: "{{ ntp_service_name }}"
+    state: restarted
+  listen: restart ntp
+  when: ansible_os_family != 'Windows'
+  tags:
+    - ntp
+    - service
+
+- name: Restart W32Time
+  ansible.windows.win_service:
+    name: "{{ ntp_service_name }}"
+    state: restarted
+  listen: restart ntp
+  when: ansible_os_family == 'Windows'
+  tags:
+    - ntp
+    - service

@@ -1,6 +1,6 @@
 ---
 name: ansible-designer
-description: AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices. Sub-commands: new-playbook, review-playbook, update-playbook, new-role, review-role, update-role, new-collection, review-collection, update-collection, new-conf, review-conf, update-conf. Requires bash_tool. Runs discovery (CLAUDE.md to ansible.cfg to README to filesystem) at the start of every command.
+description: "AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices. Sub-commands: new-playbook, review-playbook, update-playbook, new-role, review-role, update-role, new-collection, review-collection, update-collection, new-conf, review-conf, update-conf. Requires bash_tool. Runs discovery (CLAUDE.md to ansible.cfg to README to filesystem) at the start of every command."
 ---
 
 # ansible-designer

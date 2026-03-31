@@ -1,0 +1,46 @@
+---
+# tasks/main.yml — baseline role
+
+- name: Assert OS family is supported
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'RedHat'
+      - ansible_distribution_major_version | int >= 8
+    fail_msg: "baseline role supports RHEL/Rocky/Alma 8+. Found: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+  tags:
+    - baseline
+    - validate
+
+- name: Install baseline packages
+  ansible.builtin.dnf:
+    name: "{{ baseline_packages }}"
+    state: present
+  tags:
+    - baseline
+    - install
+
+- name: Apply sysctl hardening settings
+  ansible.posix.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_set: true
+    state: present
+    reload: true
+  loop: "{{ baseline_sysctl | dict2items }}"
+  when: baseline_manage_sysctl | bool
+  tags:
+    - baseline
+    - configure
+    - security
+
+- name: Configure system resource limits
+  community.general.pam_limits:
+    domain: "{{ item.domain }}"
+    limit_type: "{{ item.type }}"
+    limit_item: "{{ item.item }}"
+    value: "{{ item.value }}"
+  loop: "{{ baseline_limits }}"
+  when: baseline_manage_limits | bool
+  tags:
+    - baseline
+    - configure
