@@ -1,13 +1,14 @@
-## code file
+## code agents
 PROJECT.md
 AGENTS.md
+.codex/
 CLAUDE.md
-QWEN.md
-
-## code path
+!tests/fixtures/**/CLAUDE.md
 .claude/
+QWEN.md
 .qwen/
 
 ## env
 .ansible/
 .DS_Store
+TODO.md
