@@ -6,8 +6,7 @@
 
 
 ##### ISSUE TYPE
-<!--- Pick one or more below and delete the rest.
-      'Test Pull Request' is for PRs that add/extend tests without code changes. -->
+<!--- Pick one or more below and delete the rest. -->
 - Bugfix Pull Request
 - Docs Pull Request
 - Feature Pull Request
