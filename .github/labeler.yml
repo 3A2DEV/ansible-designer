@@ -4,33 +4,33 @@
 skill-playbook:
 - changed-files:
   - any-glob-to-any-file:
-    - skills/ansible-designer/new-playbook/**
-    - skills/ansible-designer/review-playbook/**
-    - skills/ansible-designer/update-playbook/**
+    - skills/new-playbook/**
+    - skills/review-playbook/**
+    - skills/update-playbook/**
     - skills/ansible-designer/references/playbook.md
 
 skill-role:
 - changed-files:
   - any-glob-to-any-file:
-    - skills/ansible-designer/new-role/**
-    - skills/ansible-designer/review-role/**
-    - skills/ansible-designer/update-role/**
+    - skills/new-role/**
+    - skills/review-role/**
+    - skills/update-role/**
     - skills/ansible-designer/references/role.md
 
 skill-collection:
 - changed-files:
   - any-glob-to-any-file:
-    - skills/ansible-designer/new-collection/**
-    - skills/ansible-designer/review-collection/**
-    - skills/ansible-designer/update-collection/**
+    - skills/new-collection/**
+    - skills/review-collection/**
+    - skills/update-collection/**
     - skills/ansible-designer/references/collection.md
 
 skill-conf:
 - changed-files:
   - any-glob-to-any-file:
-    - skills/ansible-designer/new-conf/**
-    - skills/ansible-designer/review-conf/**
-    - skills/ansible-designer/update-conf/**
+    - skills/new-conf/**
+    - skills/review-conf/**
+    - skills/update-conf/**
     - skills/ansible-designer/references/ansible_cfg.md
 
 skill-core:
@@ -52,6 +52,7 @@ ci:
     - .github/workflows/**
     - .github/labeler.yml
     - scripts/**
+    - package.json
 
 docs:
 - changed-files:
