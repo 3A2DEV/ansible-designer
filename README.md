@@ -48,9 +48,32 @@ AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and u
 
 ## Installation
 
-```bash
-npx skills add 3A2DEV/ansible-designer -a claude-code
+### Option A — Claude Code plugin system (recommended)
+
+Add the marketplace to `~/.claude/settings.json`, then install the plugin from the Claude Code UI:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "3A2DEV": {
+      "source": {
+        "source": "github",
+        "repo": "3A2DEV/ansible-designer"
+      }
+    }
+  }
+}
 ```
+
+Once added, open Claude Code → Plugins → find **ansible-designer** under the **3A2DEV** marketplace → Install.
+
+### Option B — npx skills (bare install, sub-commands not namespaced)
+
+```bash
+npx skills add 3A2DEV/ansible-designer -a claude-code --skill '*'
+```
+
+> **Note:** This installs each skill as a top-level command (e.g. `/review-playbook`) without the `ansible-designer:` namespace. Use Option A for the full `/ansible-designer:review-playbook` experience.
 
 **Requirements:**
 - [Claude Code](https://claude.ai/code) with `bash_tool` enabled
