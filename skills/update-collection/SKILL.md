@@ -1,6 +1,6 @@
 ---
 name: update-collection
-description: Update an existing Ansible collection. Triggered by /ansible-designer:update-collection (marketplace) or /update-collection (npx). Supports updating galaxy.yml metadata, adding roles or plugins, bumping version, and updating CHANGELOG. Shows a unified diff per file before writing and waits for explicit user confirmation.
+description: Update an existing Ansible collection. Triggered by /update-collection. Supports updating galaxy.yml metadata, adding roles or plugins, bumping version, and updating CHANGELOG. Shows a unified diff per file before writing and waits for explicit user confirmation.
 ---
 
 # update-collection

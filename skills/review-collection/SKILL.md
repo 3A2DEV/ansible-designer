@@ -1,6 +1,6 @@
 ---
 name: review-collection
-description: Review an existing Ansible collection and produce a structured severity report grouped by CRITICAL, WARNING, and INFO. Triggered by /ansible-designer:review-collection (marketplace) or /review-collection (npx). Checks galaxy.yml completeness, directory structure, required files, meta/runtime.yml, and role quality. NEVER modifies files.
+description: Review an existing Ansible collection and produce a structured severity report grouped by CRITICAL, WARNING, and INFO. Triggered by /review-collection. Checks galaxy.yml completeness, directory structure, required files, meta/runtime.yml, and role quality. NEVER modifies files.
 ---
 
 # review-collection

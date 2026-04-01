@@ -9,46 +9,37 @@ AI-assisted Ansible authoring toolkit. Scaffolds, reviews, and updates Ansible p
 
 ---
 
-## Command Names by Install Path
-
-The command prefix depends on how the skill was installed:
-
-| Install path | Command form | Example |
-|---|---|---|
-| Claude Code marketplace (`/plugin install`) | `/ansible-designer:<sub-command>` | `/ansible-designer:new-playbook` |
-| npx skills CLI (`npx skills add`) | `/<sub-command>` (top-level, no namespace) | `/new-playbook` |
-
-Both install paths run the same skill logic. Only the invocation prefix differs.
-
 ## Available Commands
 
+All commands are top-level regardless of install path.
+
 ### Playbook Commands
-| Marketplace | npx | Description |
-|-------------|-----|-------------|
-| `/ansible-designer:new-playbook` | `/new-playbook` | Create a new playbook (site, component, or AWX-ready) |
-| `/ansible-designer:review-playbook` | `/review-playbook` | Review an existing playbook — severity report, no file modification |
-| `/ansible-designer:update-playbook` | `/update-playbook` | Update a playbook — shows diff, requires confirmation |
+| Command | Description |
+|---------|-------------|
+| `/new-playbook` | Create a new playbook (site, component, or AWX-ready) |
+| `/review-playbook` | Review an existing playbook — severity report, no file modification |
+| `/update-playbook` | Update a playbook — shows diff, requires confirmation |
 
 ### Role Commands
-| Marketplace | npx | Description |
-|-------------|-----|-------------|
-| `/ansible-designer:new-role` | `/new-role` | Scaffold a complete role — asks about multi-OS support |
-| `/ansible-designer:review-role` | `/review-role` | Review a role — severity report, no file modification |
-| `/ansible-designer:update-role` | `/update-role` | Update a role — shows diff, requires confirmation |
+| Command | Description |
+|---------|-------------|
+| `/new-role` | Scaffold a complete role — asks about multi-OS support |
+| `/review-role` | Review a role — severity report, no file modification |
+| `/update-role` | Update a role — shows diff, requires confirmation |
 
 ### Collection Commands
-| Marketplace | npx | Description |
-|-------------|-----|-------------|
-| `/ansible-designer:new-collection` | `/new-collection` | Scaffold a new collection with galaxy.yml, plugins, roles structure |
-| `/ansible-designer:review-collection` | `/review-collection` | Review a collection — severity report, no file modification |
-| `/ansible-designer:update-collection` | `/update-collection` | Update a collection — shows diff, requires confirmation |
+| Command | Description |
+|---------|-------------|
+| `/new-collection` | Scaffold a new collection with galaxy.yml, plugins, roles structure |
+| `/review-collection` | Review a collection — severity report, no file modification |
+| `/update-collection` | Update a collection — shows diff, requires confirmation |
 
 ### ansible.cfg Commands
-| Marketplace | npx | Description |
-|-------------|-----|-------------|
-| `/ansible-designer:new-conf` | `/new-conf` | Generate an annotated ansible.cfg for dev, CI, or AWX |
-| `/ansible-designer:review-conf` | `/review-conf` | Review an ansible.cfg — severity report, no file modification |
-| `/ansible-designer:update-conf` | `/update-conf` | Update ansible.cfg — shows diff, requires confirmation |
+| Command | Description |
+|---------|-------------|
+| `/new-conf` | Generate an annotated ansible.cfg for dev, CI, or AWX |
+| `/review-conf` | Review an ansible.cfg — severity report, no file modification |
+| `/update-conf` | Update ansible.cfg — shows diff, requires confirmation |
 
 ---
 

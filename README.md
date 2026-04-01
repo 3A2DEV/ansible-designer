@@ -11,7 +11,7 @@
  ▐▛███▜▌   Claude Code
 ▝▜█████▛▘  Sonnet 4.6 · Claude
   ▘▘ ▝▝    ansible-designer/
-  ⎿  SessionStart:startup says: [ansible-designer 0.1.5]
+  ⎿  SessionStart:startup says: [ansible-designer 0.1.7]
      ──────────────────────────────────────────────────────────
 
  █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗         
@@ -50,16 +50,16 @@ Using Claude Code:
 /plugin install ansible-designer
 ```
 
-### Option B — npx skills (bare install, sub-commands not namespaced)
+### Option B — npx skills CLI
 
 ```bash
 npx skills add 3A2DEV/ansible-designer --skill '*'
 ```
 
-> **Note:** This installs each skill as a top-level command (e.g. `/review-playbook`) without the `ansible-designer:` namespace. Use Option A for the full `/ansible-designer:review-playbook` experience.
+Both options register each skill as a top-level command (e.g. `/new-playbook`, `/review-role`).
 
 **Requirements:**
-- [Claude Code](https://claude.ai/code) with `bash_tool` enabled
+- [Claude Code](https://claude.ai/code)
 - No additional dependencies — all Ansible knowledge is embedded in the skill
 
 ---
@@ -70,21 +70,21 @@ npx skills add 3A2DEV/ansible-designer --skill '*'
 |---------|-------------|
 | `/ansible-designer` | Show this overview and available commands |
 | **Playbooks** | |
-| `/ansible-designer:new-playbook` | Create a new playbook (site, component, or AWX-ready) |
-| `/ansible-designer:review-playbook` | Review a playbook — severity report, no file modification |
-| `/ansible-designer:update-playbook` | Update a playbook — diff + confirm before writing |
+| `/new-playbook` | Create a new playbook (site, component, or AWX-ready) |
+| `/review-playbook` | Review a playbook — severity report, no file modification |
+| `/update-playbook` | Update a playbook — diff + confirm before writing |
 | **Roles** | |
-| `/ansible-designer:new-role` | Scaffold a complete role (asks about multi-OS support) |
-| `/ansible-designer:review-role` | Review a role — severity report, no file modification |
-| `/ansible-designer:update-role` | Update a role — diff + confirm before writing |
+| `/new-role` | Scaffold a complete role (asks about multi-OS support) |
+| `/review-role` | Review a role — severity report, no file modification |
+| `/update-role` | Update a role — diff + confirm before writing |
 | **Collections** | |
-| `/ansible-designer:new-collection` | Scaffold a new collection with galaxy.yml, plugins, roles |
-| `/ansible-designer:review-collection` | Review a collection — severity report, no file modification |
-| `/ansible-designer:update-collection` | Update a collection — diff + confirm before writing |
+| `/new-collection` | Scaffold a new collection with galaxy.yml, plugins, roles |
+| `/review-collection` | Review a collection — severity report, no file modification |
+| `/update-collection` | Update a collection — diff + confirm before writing |
 | **ansible.cfg** | |
-| `/ansible-designer:new-conf` | Generate annotated ansible.cfg for dev, CI, or AWX |
-| `/ansible-designer:review-conf` | Review ansible.cfg — severity report, no file modification |
-| `/ansible-designer:update-conf` | Update ansible.cfg — diff + confirm before writing |
+| `/new-conf` | Generate annotated ansible.cfg for dev, CI, or AWX |
+| `/review-conf` | Review ansible.cfg — severity report, no file modification |
+| `/update-conf` | Update ansible.cfg — diff + confirm before writing |
 
 ---
 
@@ -129,7 +129,7 @@ Every command enforces these rules:
 ### Create a new role for nginx with RHEL + Solaris support
 
 ```bash
-/ansible-designer:new-role
+/new-role
 
 > Role name: nginx
 > Location: ./roles/
@@ -141,7 +141,7 @@ Every command enforces these rules:
 ### Review an existing playbook
 
 ```bash
-/ansible-designer:review-playbook deploy-app.yml
+/review-playbook deploy-app.yml
 
 ## Playbook Review: deploy-app.yml
 
@@ -158,7 +158,7 @@ Every command enforces these rules:
 ### Generate an AWX-optimized ansible.cfg
 
 ```bash
-/ansible-designer:new-conf
+/new-conf
 
 > Environment: awx
 
@@ -169,7 +169,7 @@ Every command enforces these rules:
 ### Update ansible.cfg with credential-safe diff display
 
 ```bash
-/ansible-designer:update-conf
+/update-conf
 
 > Change: enable fact caching with redis
 
@@ -193,7 +193,7 @@ Apply this change? (yes/no)
 ### Scaffold a new collection with input validation
 
 ```bash
-/ansible-designer:new-collection
+/new-collection
 
 > collection_path: ./collections/ansible_collections/
 > namespace: myorg

@@ -1,6 +1,6 @@
 ---
 name: new-collection
-description: Scaffold a new Ansible collection. Triggered by /ansible-designer:new-collection (marketplace) or /new-collection (npx). Collects collection_path, namespace, and collection name, then generates galaxy.yml, README.md, CHANGELOG.md, LICENSE, meta/runtime.yml, plugin skeletons (module, filter, lookup), roles directory, playbooks directory, and docs structure. Shows summary before writing.
+description: Scaffold a new Ansible collection. Triggered by /new-collection. Collects collection_path, namespace, and collection name, then generates galaxy.yml, README.md, CHANGELOG.md, LICENSE, meta/runtime.yml, plugin skeletons (module, filter, lookup), roles directory, playbooks directory, and docs structure. Shows summary before writing.
 ---
 
 # new-collection

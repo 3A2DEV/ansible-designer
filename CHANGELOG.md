@@ -5,6 +5,16 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2026-04-02
+
+### Fixed
+
+- Corrected command naming across all skills, docs, and CLAUDE.md: both install paths (marketplace and npx) register skills as top-level commands (`/new-playbook`, `/review-role`, etc.). The `/ansible-designer:X` namespaced form was never available and has been removed from all references.
+- `ansible-designer` root skill: removed the incorrect "Command Names by Install Path" table; Available Commands section now shows only the actual top-level form.
+- All 12 sub-skill descriptions: reverted from the incorrect dual-form to the correct single top-level trigger.
+- `README.md`: updated Installation section, Available Commands table, and all Example Usage code blocks to use top-level command form.
+- `CLAUDE.md`: corrected Plugin installation constraints to document that both paths produce top-level commands; removed incorrect namespace source claim.
+
 ## [0.1.6] - 2026-04-02
 
 ### Changed
