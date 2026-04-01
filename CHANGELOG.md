@@ -5,6 +5,16 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-04-01
+
+### Fixed
+
+- Restructured `skills/` layout so sub-commands are discoverable by `npx skills`:
+  sub-skills moved from `skills/ansible-designer/{sub}/SKILL.md` to `skills/{sub}/SKILL.md`
+  (one level deep, matching the superpowers/claude-mem convention)
+- Added `package.json` with `name: "ansible-designer"` so the installer uses the correct namespace
+- Updated `scripts/validate_structure.py` to scan the new layout
+
 ## [0.1.0] - 2026-03-31
 
 ### Added

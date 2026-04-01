@@ -4,10 +4,15 @@
 Rules are discovery-based — no hardcoded file lists:
 
   skills/ansible-designer/
-    Every immediate subdirectory (except references/) must contain SKILL.md.
+    Must contain SKILL.md (root entry point).
 
   skills/ansible-designer/references/
     Every .md file must be non-empty.
+
+  skills/{sub-skill}/
+    Every immediate subdirectory of skills/ (except ansible-designer/) must
+    contain SKILL.md.  These are the installed sub-commands
+    (ansible-designer:new-playbook, etc.).
 
   examples/
     Every immediate subdirectory must contain README.md.
@@ -23,7 +28,8 @@ import argparse
 import pathlib
 import sys
 
-SKILL_ROOT = pathlib.Path("skills/ansible-designer")
+SKILLS_ROOT = pathlib.Path("skills")
+SKILL_ROOT = SKILLS_ROOT / "ansible-designer"
 REFS_ROOT = SKILL_ROOT / "references"
 EXAMPLES_ROOT = pathlib.Path("examples")
 
@@ -37,7 +43,8 @@ def _relevant(path: pathlib.Path, changed: set[str] | None) -> bool:
 
 
 def check_subskills(changed: set[str] | None) -> list[str]:
-    """Every dir under SKILL_ROOT (except references/) must have SKILL.md."""
+    """Root entry SKILL.md must exist; every dir in skills/ except
+    ansible-designer/ must also have SKILL.md (these are the sub-commands)."""
     errors = []
 
     if not SKILL_ROOT.exists():
@@ -50,8 +57,12 @@ def check_subskills(changed: set[str] | None) -> list[str]:
         else:
             errors.append(f"MISSING: {root_skill}")
 
-    for d in sorted(SKILL_ROOT.iterdir()):
-        if not d.is_dir() or d.name == "references":
+    # Sub-skills live one level up: skills/{sub-skill}/SKILL.md
+    if not SKILLS_ROOT.exists():
+        return errors + [f"MISSING directory: {SKILLS_ROOT}"]
+
+    for d in sorted(SKILLS_ROOT.iterdir()):
+        if not d.is_dir() or d.name == "ansible-designer":
             continue
         skill_md = d / "SKILL.md"
         if not _relevant(skill_md, changed):
