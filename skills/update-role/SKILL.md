@@ -24,6 +24,18 @@ Locate the role via discovery (`references/discovery.md`).
 ### Step 2 — Load Target Files
 Read only the files relevant to the requested change. If the change affects multiple files (e.g., "add multi-OS support"), read all affected files.
 
+### Step 2a — Secret Scan (before any output)
+Before displaying any content or diff — especially for `defaults/main.yml`, `vars/*.yml`, and `group_vars/` files — scan every loaded file for credential-like values:
+- Match lines or YAML values where the key contains `password`, `secret`, `token`, `api_key`, `private_key`, `pass`, or `credential`
+- **Skip** lines where the value is already a vault reference (`{{ vault_* }}`), a task option (`no_log`, `register`, `when`), empty, or `None`
+- For any remaining matches, **redact the value** in all output: `db_password: "***REDACTED***"`
+- Emit a warning at the top of each affected file's diff block:
+  ```
+  ⚠ Warning: N line(s) with credential-like values were redacted from this display.
+    Review the file directly before applying changes.
+  ```
+- Never output actual credential values in diffs, summaries, or confirmations.
+
 ### Step 3 — Apply Change
 Apply the requested change to the relevant files:
 - Preserve existing structure, indentation style, and comments

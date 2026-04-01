@@ -123,8 +123,14 @@ Suggest: "Next step: [specific actionable suggestion]"
 
 ## Installation
 
+**Recommended — Claude Code Marketplace (namespaced, verified):**
+Install via the Claude Code marketplace from `3A2DEV/ansible-designer`. This path preserves the `ansible-designer:` namespace prefix and installs from a pinned, signed release.
+
+**Alternative — npx skills CLI:**
 ```bash
 npx skills add 3A2DEV/ansible-designer -a claude-code
 ```
+> **Security note:** This command pulls the latest unpinned version from the registry.
+> Verify the source at https://github.com/3A2DEV/ansible-designer before running in sensitive environments.
 
-Requires Claude Code with `bash_tool` enabled.
+Requires Claude Code.

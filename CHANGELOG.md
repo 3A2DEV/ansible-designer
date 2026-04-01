@@ -5,6 +5,16 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-04-01
+
+### Security
+
+- `ansible-designer`: Updated Installation section to recommend the Claude Code marketplace (pinned, signed) as the primary install path; added a trust warning for the unpinned `npx skills add` alternative (addresses Socket LOW alert).
+- `new-collection`: Added input validation rules rejecting shell metacharacters in `namespace`, `collection_name`, `collection_path`, `description`, and `author`; added a prompt injection boundary note in the Content Requirements section instructing the agent to treat all user inputs as literal data; quoted variables in the `find` shell command (addresses Gen MEDIUM — COMMAND_EXECUTION + PROMPT_INJECTION).
+- `update-conf`: Added Step 2a Secret Scan — scans loaded content for credential-like values and redacts them before any diff display; extended Safety Rules to require inline comments on all security-sensitive setting changes (addresses Snyk HIGH W007).
+- `update-playbook`: Added Step 2a Secret Scan — scans loaded playbook for credential-like values and redacts them before diff display (addresses Snyk HIGH W007).
+- `update-role`: Added Step 2a Secret Scan — scans all loaded role files (especially `defaults/`, `vars/`) for credential-like values and redacts them before diff display (addresses Snyk HIGH W007).
+
 ## [0.1.3] - 2026-04-01
 
 ### Changed
