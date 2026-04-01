@@ -24,6 +24,18 @@ Run discovery per `references/discovery.md` to locate the target file if only a 
 ### Step 2 — Load Existing File
 Read the full content of the target playbook.
 
+### Step 2a — Secret Scan (before any output)
+Before displaying any content or diff, scan the loaded file for credential-like values:
+- Match lines or YAML values where the key contains `password`, `secret`, `token`, `api_key`, `private_key`, `pass`, or `credential`
+- **Skip** lines where the value is already a vault reference (`{{ vault_* }}`), a task option (`no_log`, `register`, `when`), empty, or `None`
+- For any remaining matches, **redact the value** in all output: `password: "***REDACTED***"`
+- Emit a warning at the top of the diff block:
+  ```
+  ⚠ Warning: N line(s) with credential-like values were redacted from this display.
+    Review the file directly before applying changes.
+  ```
+- Never output actual credential values in diffs, summaries, or confirmations.
+
 ### Step 3 — Apply Change
 Apply the requested change following all global rules:
 - All modules use FQCN

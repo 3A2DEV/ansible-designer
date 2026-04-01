@@ -24,6 +24,18 @@ Locate the ansible.cfg via discovery (`references/discovery.md`).
 ### Step 2 — Load Existing Config
 Read the full ansible.cfg content.
 
+### Step 2a — Secret Scan (before any output)
+Before displaying any content or diff, scan every line for credential-like values:
+- Match lines where the key contains `password`, `secret`, `token`, `key`, `pass`, `credential`, or `vault_password_file`
+- **Skip** lines where the value is already a vault reference (`{{ vault_* }}`), empty, or `None`
+- For any remaining matches, **redact the value** in all output: `password = ***REDACTED***`
+- Emit a warning at the top of the diff block:
+  ```
+  ⚠ Warning: N line(s) with credential-like values were redacted from this display.
+    Review the file directly before applying changes.
+  ```
+- Never output actual credential values in diffs, summaries, or confirmations.
+
 ### Step 3 — Apply Change
 Apply the requested change:
 - Preserve all existing sections, keys, and comments
@@ -93,3 +105,5 @@ Next step: Validate with `ansible --version` to confirm the config is loaded
 - If adding `vault_password_file`, add a comment reminding about `chmod 600`.
 - If the user requests `forks > 100`, warn: "Each fork uses ~100MB RAM — ensure the controller has sufficient memory."
 - Preserve the existing indentation/alignment style (spaces around `=`).
+- **Never display actual credential values** — apply the Step 2a secret scan before any output. Redact before showing.
+- When modifying security-sensitive settings (`host_key_checking`, `become`, `transport`, `vault_password_file`, callback or stdout plugins), always add an inline comment explaining the security implication of the change.
