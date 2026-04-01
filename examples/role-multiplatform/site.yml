@@ -1,0 +1,26 @@
+---
+# site.yml — Multi-OS NTP configuration
+# Demonstrates: OS-specific task dispatch, include_vars with_first_found,
+#               Windows/WinRM, Solaris SMF, RHEL chrony.
+#
+# Usage:
+#   ansible-playbook -i inventory/hosts.yml site.yml
+#   ansible-playbook -i inventory/hosts.yml site.yml --limit windows
+#   ansible-playbook -i inventory/hosts.yml site.yml -t ntp,validate
+
+- name: Configure NTP on all hosts (RHEL / Solaris / Windows)
+  hosts: all
+  gather_facts: true
+  become: true
+  become_method: ansible.builtin.sudo
+
+  vars:
+    ntp_servers:
+      - 0.pool.ntp.org
+      - 1.pool.ntp.org
+    ntp_timezone: UTC
+
+  roles:
+    - role: ntp
+      tags:
+        - ntp

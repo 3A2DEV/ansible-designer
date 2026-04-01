@@ -1,0 +1,90 @@
+---
+# tasks/main.yml — nginx role for RHEL 8/9
+
+- name: Assert OS family is RedHat
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'RedHat'
+      - ansible_distribution_major_version | int >= 8
+    fail_msg: "This role supports RHEL/CentOS/Rocky 8+. Found: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+  tags:
+    - nginx
+    - validate
+
+- name: Install nginx package
+  ansible.builtin.dnf:
+    name: "{{ nginx_package }}"
+    state: present
+  tags:
+    - nginx
+    - install
+
+- name: Create nginx log directory
+  ansible.builtin.file:
+    path: "{{ nginx_log_dir }}"
+    state: directory
+    owner: root
+    group: "{{ nginx_group }}"
+    mode: "0750"
+  tags:
+    - nginx
+    - configure
+
+- name: Deploy nginx configuration
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: "{{ nginx_config_dir }}/nginx.conf"
+    owner: root
+    group: root
+    mode: "0644"
+    validate: "nginx -t -c %s"
+    backup: true
+  notify: Reload nginx
+  tags:
+    - nginx
+    - configure
+
+- name: Configure SELinux to allow nginx network connections
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: "{{ nginx_selinux_allow_network | bool }}"
+    persistent: true
+  when:
+    - ansible_selinux.status is defined
+    - ansible_selinux.status == 'enabled'
+  tags:
+    - nginx
+    - security
+
+- name: Open nginx port in firewalld
+  ansible.posix.firewalld:
+    port: "{{ nginx_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true
+  when: nginx_manage_firewall | bool
+  tags:
+    - nginx
+    - security
+
+- name: Ensure nginx service is started and enabled
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: started
+    enabled: true
+    daemon_reload: true
+  tags:
+    - nginx
+    - service
+
+- name: Verify nginx is responding on port {{ nginx_port }}
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ nginx_port }}/"
+    status_code: [200, 301, 302, 403]
+  register: nginx_healthcheck
+  retries: 3
+  delay: 5
+  until: nginx_healthcheck.status is defined
+  tags:
+    - nginx
+    - validate

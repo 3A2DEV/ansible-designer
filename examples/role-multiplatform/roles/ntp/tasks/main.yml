@@ -1,0 +1,29 @@
+---
+# tasks/main.yml — NTP role entry point (multi-OS: RHEL, Solaris, Windows)
+
+- name: Load OS-specific variables
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - main.yml
+  tags:
+    - ntp
+    - configure
+
+- name: Include OS-specific NTP tasks
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family in ['RedHat', 'Solaris', 'Windows']
+  tags:
+    - ntp
+
+- name: Fail on unsupported OS
+  ansible.builtin.fail:
+    msg: "OS family '{{ ansible_os_family }}' is not supported by the ntp role. Supported: RedHat, Solaris, Windows"
+  when: ansible_os_family not in ['RedHat', 'Solaris', 'Windows']
+  tags:
+    - ntp
+    - validate

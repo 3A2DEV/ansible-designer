@@ -1,0 +1,30 @@
+---
+# group_vars/all.yml — Variables applied to all hosts
+
+# Deployment metadata
+deploy_environment: production
+app_version: "1.0.0"
+
+# Common package list installed by the common role
+common_packages:
+  - curl
+  - wget
+  - vim
+  - htop
+  - net-tools
+
+# NTP servers (used by the common role for chrony configuration)
+common_ntp_servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
+# Timezone
+common_timezone: Europe/Brussels
+
+# Logging
+common_log_dir: /var/log/app
+common_log_retention_days: 30
+
+# Vault-wrapped variables (vault values in group_vars/all/vault.yml)
+app_secret_key: "{{ vault_app_secret_key }}"
+app_db_password: "{{ vault_app_db_password }}"

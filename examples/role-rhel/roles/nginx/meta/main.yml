@@ -1,0 +1,24 @@
+---
+# meta/main.yml — Role metadata for nginx
+
+galaxy_info:
+  role_name: nginx
+  author: platform-team
+  description: "Installs and configures nginx on RHEL 8/9 with SELinux and firewalld support"
+  company: "MyOrg"
+  license: Apache-2.0
+  min_ansible_version: "2.15"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+
+  galaxy_tags:
+    - nginx
+    - web
+    - rhel
+    - linux
+
+dependencies: []

@@ -1,0 +1,97 @@
+---
+# =============================================================================
+# Playbook: site.yml
+# Author:   Platform Team
+# Version:  1.0.0
+# Description: Full site deployment for the web application stack.
+#              Applies common baseline, nginx, and application roles to the
+#              appropriate host groups.
+# Usage:
+#   ansible-playbook -i inventory/ site.yml
+#   ansible-playbook -i inventory/ site.yml --tags nginx
+#   ansible-playbook -i inventory/ site.yml --limit web01 --check
+# =============================================================================
+
+- name: Verify prerequisites
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Assert minimum Ansible version
+      ansible.builtin.assert:
+        that: ansible_version.full is version('2.15', '>=')
+        fail_msg: "Requires ansible-core >= 2.15. Installed: {{ ansible_version.full }}"
+      tags: [always]
+
+- name: Apply common baseline to all hosts
+  hosts: all
+  become: true
+  gather_facts: true
+  pre_tasks:
+    - name: Wait for host SSH availability
+      ansible.builtin.wait_for_connection:
+        timeout: 60
+      tags: [always]
+
+    - name: Gather minimal facts
+      ansible.builtin.setup:
+        gather_subset:
+          - min
+          - hardware
+          - network
+      tags: [always]
+
+  roles:
+    - role: common
+      tags: [common]
+
+  post_tasks:
+    - name: Verify baseline packages are present
+      ansible.builtin.assert:
+        that: "'curl' in ansible_facts.packages"
+        fail_msg: "Baseline package 'curl' was not installed by the common role"
+      ignore_errors: true
+      tags: [common, validate]
+
+- name: Configure web servers
+  hosts: webservers
+  become: true
+  gather_facts: true
+  roles:
+    - role: nginx
+      tags: [nginx]
+
+  post_tasks:
+    - name: Verify nginx is listening on port 80
+      ansible.builtin.wait_for:
+        host: "{{ ansible_host }}"
+        port: 80
+        timeout: 30
+      delegate_to: localhost
+      tags: [nginx, validate]
+
+- name: Configure database servers
+  hosts: databases
+  become: true
+  gather_facts: true
+  serial: 1
+  roles:
+    - role: postgres
+      tags: [postgres]
+
+  post_tasks:
+    - name: Verify PostgreSQL is listening
+      ansible.builtin.wait_for:
+        host: "{{ ansible_host }}"
+        port: "{{ postgres_port | default(5432) }}"
+        timeout: 30
+      delegate_to: localhost
+      tags: [postgres, validate]
+
+- name: Post-deployment summary
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Print deployment complete
+      ansible.builtin.debug:
+        msg: "Deployment complete on {{ inventory_hostname }} ({{ ansible_host }})"
+      tags: [always]

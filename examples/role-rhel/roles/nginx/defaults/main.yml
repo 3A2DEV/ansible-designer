@@ -1,0 +1,45 @@
+---
+# defaults/main.yml — User-overridable defaults for nginx role
+
+# Port nginx listens on
+nginx_port: 80
+
+# HTTPS port (used when nginx_enable_ssl is true)
+nginx_ssl_port: 443
+
+# Enable SSL/TLS
+nginx_enable_ssl: false
+
+# SSL certificate and key paths (set when nginx_enable_ssl is true)
+nginx_ssl_cert: /etc/ssl/certs/nginx.crt
+nginx_ssl_key: /etc/ssl/private/nginx.key
+
+# Worker processes (auto = number of CPU cores)
+nginx_worker_processes: "{{ ansible_processor_vcpus | default('auto') }}"
+
+# Maximum number of simultaneous connections per worker
+nginx_worker_connections: 1024
+
+# Client request body size limit
+nginx_client_max_body_size: "10m"
+
+# Keepalive timeout in seconds
+nginx_keepalive_timeout: 65
+
+# Log level: debug, info, notice, warn, error, crit
+nginx_log_level: warn
+
+# Package version (present = latest available, specific version = pin)
+nginx_version: present
+
+# Whether to configure firewalld rules
+nginx_manage_firewall: true
+
+# Whether to configure SELinux boolean for network connections
+nginx_selinux_allow_network: true
+
+# Server name (for default vhost)
+nginx_server_name: "_"
+
+# Document root for default vhost
+nginx_document_root: /usr/share/nginx/html

@@ -1,0 +1,13 @@
+## code agents
+PROJECT.md
+AGENTS.md
+.codex/
+CLAUDE.md
+.claude/
+QWEN.md
+.qwen/
+
+## env
+.ansible/
+.DS_Store
+TODO.md

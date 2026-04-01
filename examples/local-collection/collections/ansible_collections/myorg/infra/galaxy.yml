@@ -1,0 +1,34 @@
+---
+# galaxy.yml — ansible-collection-infra
+namespace: myorg
+name: infra
+version: 1.0.0
+readme: README.md
+description: "Infrastructure automation collection — baseline roles and modules for myorg"
+
+authors:
+  - "Platform Team <platform@myorg.example>"
+
+license:
+  - Apache-2.0
+
+tags:
+  - linux
+  - rhel
+  - infrastructure
+  - sysops
+
+dependencies: {}
+
+repository: https://github.com/myorg/ansible-collection-infra
+documentation: https://github.com/myorg/ansible-collection-infra/blob/main/docs
+homepage: https://myorg.example.com/infrastructure
+issues: https://github.com/myorg/ansible-collection-infra/issues
+
+build_ignore:
+  - "*.tar.gz"
+  - ".github"
+  - ".git"
+  - "tests/output"
+  - "venv"
+  - ".venv"

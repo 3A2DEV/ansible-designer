@@ -1,0 +1,7 @@
+---
+# vars/RedHat.yml — RHEL/CentOS/Rocky/AlmaLinux NTP variables
+ntp_package: chrony
+ntp_service_name: chronyd
+ntp_config_path: /etc/chrony.conf
+ntp_drift_file: /var/lib/chrony/drift
+ntp_log_dir: /var/log/chrony

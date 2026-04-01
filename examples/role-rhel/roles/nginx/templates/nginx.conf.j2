@@ -1,0 +1,75 @@
+# nginx.conf — managed by Ansible (role: nginx)
+# DO NOT EDIT MANUALLY — changes will be overwritten on next Ansible run
+
+user {{ nginx_user }};
+worker_processes {{ nginx_worker_processes }};
+error_log {{ nginx_log_dir }}/error.log {{ nginx_log_level }};
+pid {{ nginx_pid_file }};
+
+events {
+    worker_connections {{ nginx_worker_connections }};
+    use epoll;
+    multi_accept on;
+}
+
+http {
+    include       {{ nginx_mime_types_file }};
+    default_type  application/octet-stream;
+
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log {{ nginx_log_dir }}/access.log main;
+
+    sendfile           on;
+    tcp_nopush         on;
+    tcp_nodelay        on;
+    keepalive_timeout  {{ nginx_keepalive_timeout }};
+    types_hash_max_size 4096;
+    client_max_body_size {{ nginx_client_max_body_size }};
+
+    gzip  on;
+    gzip_comp_level 5;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+
+    server {
+        listen       {{ nginx_port }} default_server;
+        listen       [::]:{{ nginx_port }} default_server;
+        server_name  {{ nginx_server_name }};
+        root         {{ nginx_document_root }};
+
+        index index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+
+        location = /50x.html {
+            root {{ nginx_document_root }};
+        }
+
+{% if nginx_enable_ssl %}
+    server {
+        listen       {{ nginx_ssl_port }} ssl http2;
+        server_name  {{ nginx_server_name }};
+        root         {{ nginx_document_root }};
+
+        ssl_certificate     {{ nginx_ssl_cert }};
+        ssl_certificate_key {{ nginx_ssl_key }};
+        ssl_protocols       TLSv1.2 TLSv1.3;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers on;
+        ssl_session_cache   shared:SSL:10m;
+        ssl_session_timeout 10m;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+    }
+{% endif %}
+    }
+}

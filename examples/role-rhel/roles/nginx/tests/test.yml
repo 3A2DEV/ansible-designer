@@ -1,0 +1,13 @@
+---
+# tests/test.yml — Smoke test for nginx role
+- name: Test nginx role on RHEL
+  hosts: localhost
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: nginx
+      vars:
+        nginx_port: 8080
+        nginx_manage_firewall: false
+        nginx_selinux_allow_network: false

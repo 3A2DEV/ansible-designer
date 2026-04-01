@@ -1,0 +1,19 @@
+---
+# handlers/main.yml — nginx event handlers
+
+- name: Reload nginx
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: reloaded
+  listen: "reload nginx"
+
+- name: Restart nginx
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: restarted
+  listen: "restart nginx"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+  listen: "reload systemd"
