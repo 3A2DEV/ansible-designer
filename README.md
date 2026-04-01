@@ -1,8 +1,11 @@
 # ansible-designer
 
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Ansible](https://img.shields.io/badge/ansible--core-2.15%2B-red.svg)](https://docs.ansible.com/)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-SKILL-orange.svg)](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+![GitHub License](https://img.shields.io/github/license/3a2dev/ansible-designer?logo=github&color=blue)
+![Claude Code](https://img.shields.io/badge/SKILL-orange?logo=claude&label=Claude%20Code)
+![Ansible Designer](https://img.shields.io/badge/skill-orange?logo=claude&label=%2Fansible-designer)
+![Ansible Core](https://img.shields.io/badge/2.15%2B-red?logo=ansible&label=Ansible%20Core%20)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/3A2DEV/ansible-designer/validate.yml?branch=main&logo=github&label=Validate%20CI)
+
 
 ```
  ▐▛███▜▌   Claude Code
