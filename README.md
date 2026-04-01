@@ -11,7 +11,7 @@
  ▐▛███▜▌   Claude Code
 ▝▜█████▛▘  Sonnet 4.6 · Claude
   ▘▘ ▝▝    ansible-designer/
-  ⎿  SessionStart:startup says: [ansible-designer]
+  ⎿  SessionStart:startup says: [ansible-designer 0.1.5]
      ──────────────────────────────────────────────────────────
 
  █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗         
@@ -44,20 +44,16 @@ AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and u
 Using Claude Code:
 
 ```bash
-───────────────────────────────────────────────────────────────
-❯ /plugin marketplace add 3A2DEV/ansible-designer
-───────────────────────────────────────────────────────────────
+/plugin marketplace add 3A2DEV/ansible-designer
 ```
 ```bash
-───────────────────────────────────────────────────────────────
-❯ /plugin install ansible-designer
-───────────────────────────────────────────────────────────────
+/plugin install ansible-designer
 ```
 
 ### Option B — npx skills (bare install, sub-commands not namespaced)
 
 ```bash
-npx skills add 3A2DEV/ansible-designer -a claude-code --skill '*'
+npx skills add 3A2DEV/ansible-designer --skill '*'
 ```
 
 > **Note:** This installs each skill as a top-level command (e.g. `/review-playbook`) without the `ansible-designer:` namespace. Use Option A for the full `/ansible-designer:review-playbook` experience.
@@ -132,19 +128,19 @@ Every command enforces these rules:
 
 ### Create a new role for nginx with RHEL + Solaris support
 
-```
+```bash
 /ansible-designer:new-role
 
 > Role name: nginx
 > Location: ./roles/
-> Multi-OS support: yes (RHEL + Solaris)
+> Multi-OS support: yes
 
 → Generates roles/nginx/ with 12 files including OS-specific task and var files
 ```
 
 ### Review an existing playbook
 
-```
+```bash
 /ansible-designer:review-playbook deploy-app.yml
 
 ## Playbook Review: deploy-app.yml
@@ -161,13 +157,65 @@ Every command enforces these rules:
 
 ### Generate an AWX-optimized ansible.cfg
 
-```
+```bash
 /ansible-designer:new-conf
 
 > Environment: awx
 
 → Generates ./ansible.cfg with Redis fact caching, AWX callback configuration,
   strict SSH settings, and annotated vault identity list
+```
+
+### Update ansible.cfg with credential-safe diff display
+
+```bash
+/ansible-designer:update-conf
+
+> Change: enable fact caching with redis
+
+⚠ Warning: 1 line(s) with credential-like values were redacted from this display.
+  Review the file directly before applying changes.
+
+--- ansible.cfg (original)
++++ ansible.cfg (proposed)
+@@ -8,6 +8,10 @@
+ forks                 = 10
+ timeout               = 30
++
++# Fact caching: redis (shared across controller nodes; configure auth via REDIS_URL or vault)
++fact_caching          = redis
++fact_caching_connection = redis://:{{ vault_redis_password }}@cache.internal:6379/0
++fact_caching_timeout  = 86400
+
+Apply this change? (yes/no)
+```
+
+### Scaffold a new collection with input validation
+
+```bash
+/ansible-designer:new-collection
+
+> collection_path: ./collections/ansible_collections/
+> namespace: myorg
+> collection_name: security_baseline
+> description: Baseline security hardening collection for RHEL targets
+> author: ops-team <ops@example.com>
+
+Will create: ./collections/ansible_collections/myorg/security_baseline/ (13 files)
+
+  galaxy.yml            — namespace: myorg, name: security_baseline, version: 0.1.0
+  README.md             — collection overview
+  CHANGELOG.md          — v0.1.0 initial
+  LICENSE               — Apache 2.0
+  meta/runtime.yml      — requires_ansible: >=2.15.0
+  plugins/modules/get_info.py
+  plugins/filter/string_filters.py
+  plugins/lookup/config_value.py
+  roles/.gitkeep
+  tests/integration/.gitkeep
+  tests/unit/.gitkeep
+
+Proceed? (yes/no)
 ```
 
 ---
