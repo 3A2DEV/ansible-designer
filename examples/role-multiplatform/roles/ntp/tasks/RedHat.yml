@@ -33,9 +33,9 @@
 - name: Verify chrony is synchronized (RHEL)
   ansible.builtin.command:
     cmd: chronyc tracking
-  register: chrony_tracking
+  register: ntp_chrony_tracking
   changed_when: false
-  failed_when: "'Leap status     : Normal' not in chrony_tracking.stdout and 'Not synchronised' in chrony_tracking.stdout"
+  failed_when: "'Leap status     : Normal' not in ntp_chrony_tracking.stdout and 'Not synchronised' in ntp_chrony_tracking.stdout"
   tags:
     - ntp
     - validate

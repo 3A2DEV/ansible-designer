@@ -5,6 +5,14 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-04-01
+
+### Changed
+
+- Refreshed the runtime references under `skills/ansible-designer/references/` to align playbook, role, collection, inventory, config, testing, plugin, and vault guidance with the repository's `ansible-core 2.15+` contract.
+- Added new runtime references: `testing.md`, `security_vault.md`, and `plugins.md`, and wired them into the root skill and sub-skills.
+- Expanded `examples/` with self-contained validation-focused content, including bundled roles for `simple-playbook/`, improved multi-platform and local collection examples, and new `ansible-cfg-profiles/` and `inventory-vault/` examples.
+
 ## [0.1.2] - 2026-04-01
 
 ### Fixed

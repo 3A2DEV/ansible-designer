@@ -1,0 +1,6 @@
+# ntp.conf - managed by Ansible
+driftfile {{ ntp_drift_file }}
+
+{% for server in ntp_servers %}
+server {{ server }} iburst
+{% endfor %}

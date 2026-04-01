@@ -100,8 +100,9 @@ Use `references/role.md` as the base for all generated content.
 - At least 3 realistic tasks for the named role (not generic "Install package" — use the actual component)
 - FQCN for all modules
 - Tags on every task (role_name + action category)
-- `no_log: true` on any task that handles secrets or passwords
+- `no_log: true` on any task that handles secrets or passwords per `references/security_vault.md`
 - For multi-OS: OS detection block at the top using `ansible.builtin.include_vars` + `with_first_found`
+- Include a smoke-test path aligned with `references/testing.md`
 
 ### defaults/main.yml must include
 - Port number

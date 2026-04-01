@@ -71,7 +71,7 @@ Summary: <X> critical, <Y> warnings, <Z> info
 | retry_files_enabled=True | `retry_files_enabled = True` (the default) | `[defaults] retry_files_enabled is True (default) — consider setting to False to reduce filesystem noise` |
 | Deprecated squash_actions | `squash_actions` key present | `[defaults] squash_actions was removed in ansible-core 2.8 — remove this setting` |
 | Deprecated any_errors_fatal at cfg level | `any_errors_fatal` in ansible.cfg (not a valid ansible.cfg setting) | `[defaults] any_errors_fatal belongs in playbooks, not ansible.cfg` |
-| Missing collections_paths | `collections_paths` not set and `./collections` directory exists | `[defaults] ./collections/ directory exists but collections_paths is not configured — add collections_paths = ./collections` |
+| Missing collections_path | local collections exist but no collection path is configured | `[defaults] ./collections/ directory exists but collections_path is not configured — add collections_path = ./collections` |
 | pipelining disabled | `pipelining = False` or not set | `[ssh_connection] pipelining is disabled — enable it for significant performance improvement (requires Defaults:!requiretty in /etc/sudoers)` |
 
 ### INFO

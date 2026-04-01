@@ -66,9 +66,11 @@ Use `references/playbook.md` as the base template. Select the appropriate templa
 Apply these rules to the generated content:
 - All modules use FQCN
 - All tasks have tags (component + action category)
-- `no_log: true` on any task handling secrets
+- `no_log: true` on any task handling secrets per `references/security_vault.md`
 - `pre_tasks` includes OS version assertion using `ansible.builtin.assert`
 - Include a `post_tasks` validation block using `ansible.builtin.wait_for` or `ansible.builtin.uri`
+- Keep inventory and variable references aligned with `references/inventory.md`
+- End with validation guidance aligned with `references/testing.md`
 - Include block/rescue pattern for the main execution block if multiple steps
 - Proper YAML comment header (author, version, description, usage)
 

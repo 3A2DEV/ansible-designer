@@ -28,10 +28,11 @@ Read the full content of the target playbook.
 Apply the requested change following all global rules:
 - All modules use FQCN
 - All tasks have tags (component + action category)
-- `no_log: true` on any task handling secrets
+- `no_log: true` on any task handling secrets per `references/security_vault.md`
 - Preserve existing structure, indentation style, and header
 - Preserve all existing functionality — only change what was requested
 - Use templates from `references/playbook.md` for any new blocks added
+- Keep validation changes aligned with `references/testing.md`
 
 ### Step 4 — Show Unified Diff
 Display the diff in unified format:

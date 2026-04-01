@@ -123,7 +123,8 @@ Every command enforces these rules:
 5. **review never modifies** — review commands produce reports only
 6. **update always diffs** — update commands show unified diffs before writing
 7. **File tree after writes** — every write operation ends with a file tree
-8. **Next step suggestion** — every command ends with a concrete next action
+8. **Testing-aware output** — generated examples and updates include a realistic validation path
+9. **Next step suggestion** — every command ends with a concrete next action
 
 ---
 
@@ -177,10 +178,12 @@ See the [`examples/`](examples/) directory for working Ansible projects:
 
 | Example | Description |
 |---------|-------------|
-| `simple-playbook/` | Complete site playbook with inventory, group_vars |
+| `simple-playbook/` | Complete site playbook with inventory, group_vars, and bundled example roles |
 | `role-rhel/` | Full nginx role targeting RHEL 8/9 |
 | `role-multiplatform/` | NTP role for RHEL + Solaris + Windows |
 | `local-collection/` | Complete local collection with module, filter, and lookup plugins |
+| `ansible-cfg-profiles/` | Development, CI, and controller-oriented `ansible.cfg` profiles |
+| `inventory-vault/` | Safe inventory and vault-wrapper example layout |
 
 ---
 

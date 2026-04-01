@@ -66,19 +66,22 @@ requires_ansible: ">=2.15.0"
 ```
 
 ### plugins/modules/get_info.py
-Use the complete module skeleton from `references/collection.md`. Customize for the collection's domain:
+Use the complete module skeleton from `references/collection.md` and `references/plugins.md`. Customize for the collection's domain:
 - DOCUMENTATION block with module name `<namespace>.<name>.get_info`
 - argument_spec appropriate to the domain
 - Realistic EXAMPLES and RETURN blocks
 
 ### plugins/filter/string_filters.py
-Use the filter skeleton from `references/collection.md`. Include 2 realistic filters for the collection's domain.
+Use the filter skeleton from `references/collection.md` and `references/plugins.md`. Include 2 realistic filters for the collection's domain.
 
 ### plugins/lookup/config_value.py
-Use the lookup skeleton from `references/collection.md`. Customize for the collection's domain.
+Use the lookup skeleton from `references/collection.md` and `references/plugins.md`. Customize for the collection's domain.
 
 ### playbooks/site.yml
 A working example playbook that uses `<namespace>.<name>.<first_role>`.
+
+### testing guidance
+Document a validation path aligned with `references/testing.md`, including `ansible-playbook --syntax-check` and `ansible-test sanity` when plugins are present.
 
 ---
 

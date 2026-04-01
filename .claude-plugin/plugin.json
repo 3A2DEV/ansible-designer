@@ -1,7 +1,7 @@
 {
   "name": "ansible-designer",
   "description": "AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "NomakCooper"
   },

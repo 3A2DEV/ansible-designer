@@ -3,12 +3,16 @@
 
 - name: Load OS-specific variables
   ansible.builtin.include_vars:
-    file: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_os_family }}.yml"
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - main.yml
+    file: "{{ lookup('ansible.builtin.first_found', ntp_first_found) }}"
+  vars:
+    ntp_first_found:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - main.yml
+      paths:
+        - "{{ role_path }}/vars"
   tags:
     - ntp
     - configure

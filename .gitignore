@@ -1,5 +1,4 @@
 ## code agents
-PROJECT.md
 AGENTS.md
 .codex/
 CLAUDE.md
@@ -11,3 +10,5 @@ QWEN.md
 .ansible/
 .DS_Store
 TODO.md
+PROJECT.md
+UPDATE.md

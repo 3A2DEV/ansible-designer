@@ -80,6 +80,7 @@ Summary: <X> critical, <Y> warnings, <Z> info
 | Check | Condition | Message |
 |-------|-----------|---------|
 | No tests/ directory | tests/ absent | `No tests/ directory found — consider adding tests/test.yml for smoke testing` |
+| No validation guidance | role has example content but no clear smoke-test path | `Add tests/test.yml or README validation guidance aligned with references/testing.md` |
 | No README.md | Role has no README | `Role is missing a README.md — document variables, dependencies, and usage` |
 | tasks/main.yml lacks assertions | No `ansible.builtin.assert` in tasks/main.yml | `Consider adding an assert to validate minimum Ansible version or required variables` |
 | Templates not validated | `ansible.builtin.template` task without `validate:` parameter | `[tasks/main.yml:line <N>] Template task for <dest> could use 'validate:' to verify syntax before deployment` |

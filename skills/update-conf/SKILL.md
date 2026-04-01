@@ -33,6 +33,7 @@ Apply the requested change:
 - Use correct INI format: `key = value` with spaces around `=`
 - If a requested section doesn't exist, create it at the appropriate location
 - If removing a key: remove only that line (and its comment block if it's clearly paired)
+- Prefer `collections_path` in newly generated examples while preserving existing intent in older files
 
 ### Step 4 — Show Unified Diff
 

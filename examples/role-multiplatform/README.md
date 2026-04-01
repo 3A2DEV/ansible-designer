@@ -4,7 +4,7 @@ Demonstrates a multi-OS role that configures NTP across RHEL, Solaris, and Windo
 
 ## What this shows
 
-- `include_vars` with `with_first_found` for OS-specific variable loading
+- `include_vars` with `first_found` behavior for OS-specific variable loading
 - OS-dispatched task files (`RedHat.yml`, `Solaris.yml`, `Windows.yml`) via `include_tasks`
 - `ansible.windows.*` modules for Windows/WinRM targets
 - Solaris SMF (`svcadm`/`svccfg`) for service management
@@ -54,3 +54,10 @@ ansible-playbook -i inventory/hosts.yml site.yml --limit rhel,solaris -t validat
 - `ansible.windows` collection for Windows targets
 - `ansible.posix` collection for RHEL targets
 - WinRM configured on Windows hosts (HTTPS recommended in production)
+
+## Validation
+
+```bash
+ansible-playbook -i inventory/hosts.yml site.yml --syntax-check
+ansible-lint .
+```

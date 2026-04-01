@@ -19,13 +19,31 @@
     - baseline
     - install
 
+- name: Ensure example sysctl directory exists
+  ansible.builtin.file:
+    path: /tmp/sysctl.d
+    state: directory
+    mode: "0755"
+  when: baseline_manage_sysctl | bool
+  tags:
+    - baseline
+    - configure
+
+- name: Ensure example limits directory exists
+  ansible.builtin.file:
+    path: /tmp/security-limits
+    state: directory
+    mode: "0755"
+  when: baseline_manage_limits | bool
+  tags:
+    - baseline
+    - configure
+
 - name: Apply sysctl hardening settings
-  ansible.posix.sysctl:
-    name: "{{ item.key }}"
-    value: "{{ item.value }}"
-    sysctl_set: true
-    state: present
-    reload: true
+  ansible.builtin.copy:
+    dest: "/tmp/sysctl.d/{{ item.key | replace('.', '_') }}.conf"
+    content: "{{ item.key }} = {{ item.value }}\n"
+    mode: "0644"
   loop: "{{ baseline_sysctl | dict2items }}"
   when: baseline_manage_sysctl | bool
   tags:
@@ -34,11 +52,10 @@
     - security
 
 - name: Configure system resource limits
-  community.general.pam_limits:
-    domain: "{{ item.domain }}"
-    limit_type: "{{ item.type }}"
-    limit_item: "{{ item.item }}"
-    value: "{{ item.value }}"
+  ansible.builtin.copy:
+    dest: "/tmp/security-limits/{{ item.domain | regex_replace('[^A-Za-z0-9_-]', '_') }}-{{ item.item }}-{{ item.type }}.conf"
+    content: "{{ item.domain }} {{ item.type }} {{ item.item }} {{ item.value }}\n"
+    mode: "0644"
   loop: "{{ baseline_limits }}"
   when: baseline_manage_limits | bool
   tags:

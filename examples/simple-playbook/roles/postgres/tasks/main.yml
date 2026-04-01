@@ -1,0 +1,28 @@
+---
+- name: Assert database port is valid
+  ansible.builtin.assert:
+    that:
+      - postgres_port | int > 0
+      - postgres_port | int < 65536
+    fail_msg: "postgres_port must be a valid TCP port"
+  tags:
+    - postgres
+    - validate
+
+- name: Render example PostgreSQL settings
+  ansible.builtin.copy:
+    dest: /tmp/example-postgres.conf
+    content: |
+      port={{ postgres_port }}
+      max_connections={{ postgres_max_connections | default(200) }}
+    mode: "0644"
+  tags:
+    - postgres
+    - configure
+
+- name: Report example database role state
+  ansible.builtin.debug:
+    msg: "Example postgres role prepared port {{ postgres_port }}"
+  tags:
+    - postgres
+    - service

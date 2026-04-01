@@ -49,9 +49,9 @@ Every sub-command enforces these rules without exception:
 
 2. **Never overwrite silently** — Before writing any file, show a summary (new files) or unified diff (modifications). Wait for explicit user confirmation (`yes` / `y`). Only write after confirmation.
 
-3. **FQCN mandatory** — Every module reference uses the Fully Qualified Collection Name. `ansible.builtin.copy`, never `copy`. `ansible.builtin.service`, never `service`. See `references/best_practices.md` for the complete mapping table.
+3. **FQCN mandatory** — Every module reference uses the Fully Qualified Collection Name. `ansible.builtin.copy`, never `copy`. `ansible.builtin.service`, never `service`. See `references/best_practices.md`.
 
-4. **no_log: true on secrets** — Every task handling passwords, tokens, API keys, vault variables, or credentials must include `no_log: true`.
+4. **no_log: true on secrets** — Every task handling passwords, tokens, API keys, vault variables, or credentials must include `no_log: true`. See `references/security_vault.md`.
 
 5. **Tags on every task** — Minimum: component name + action category (`install`, `configure`, `service`, `validate`, `security`, `cleanup`). No task may be untagged.
 
@@ -61,7 +61,9 @@ Every sub-command enforces these rules without exception:
 
 8. **Show file tree after writes** — After any write operation, run `find <path> -type f | sort` and display the resulting file tree.
 
-9. **Suggest next step** — End every command with a concrete suggestion: which command to run next, or what to validate.
+9. **Testing-aware output** — New or updated examples must include a realistic validation path. See `references/testing.md`.
+
+10. **Suggest next step** — End every command with a concrete suggestion: which command to run next, or what to validate.
 
 ---
 
@@ -113,6 +115,9 @@ Suggest: "Next step: [specific actionable suggestion]"
 | `references/collection.md` | new-collection, review-collection, update-collection |
 | `references/ansible_cfg.md` | new-conf, review-conf, update-conf |
 | `references/inventory.md` | All commands — inventory context |
+| `references/testing.md` | All commands — validation and example test guidance |
+| `references/security_vault.md` | All commands — secret handling and vault-safe patterns |
+| `references/plugins.md` | Collection commands — module/filter/lookup guidance |
 
 ---
 

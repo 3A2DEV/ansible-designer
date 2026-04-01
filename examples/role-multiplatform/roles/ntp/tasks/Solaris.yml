@@ -4,7 +4,7 @@
 - name: Check if NTP package is installed (Solaris)
   ansible.builtin.command:
     cmd: "pkg info {{ ntp_package }}"
-  register: pkg_info_result
+  register: ntp_pkg_info_result
   changed_when: false
   failed_when: false
   tags:
@@ -14,7 +14,8 @@
 - name: Install NTP package (Solaris)
   ansible.builtin.command:
     cmd: "pkg install {{ ntp_package }}"
-  when: pkg_info_result.rc != 0
+  when: ntp_pkg_info_result.rc != 0
+  changed_when: true
   tags:
     - ntp
     - install
@@ -33,7 +34,7 @@
 - name: Check current SMF service state (Solaris)
   ansible.builtin.command:
     cmd: "svcs -H -o state {{ ntp_smf_fmri }}"
-  register: smf_state
+  register: ntp_smf_state
   changed_when: false
   failed_when: false
   tags:
@@ -43,7 +44,8 @@
 - name: Enable NTP SMF service (Solaris)
   ansible.builtin.command:
     cmd: "svcadm enable -s {{ ntp_smf_fmri }}"
-  when: smf_state.stdout is not defined or smf_state.stdout.strip() not in ['online', 'degraded']
+  when: ntp_smf_state.stdout is not defined or ntp_smf_state.stdout.strip() not in ['online', 'degraded']
+  changed_when: true
   tags:
     - ntp
     - service
@@ -51,6 +53,7 @@
 - name: Restart NTP SMF service to apply config (Solaris)
   ansible.builtin.command:
     cmd: "svcadm restart {{ ntp_smf_fmri }}"
+  changed_when: true
   tags:
     - ntp
     - service
@@ -58,8 +61,8 @@
 - name: Verify NTP SMF service is online (Solaris)
   ansible.builtin.command:
     cmd: "svcs -H -o state {{ ntp_smf_fmri }}"
-  register: smf_final_state
-  failed_when: smf_final_state.stdout.strip() != 'online'
+  register: ntp_smf_final_state
+  failed_when: ntp_smf_final_state.stdout.strip() != 'online'
   changed_when: false
   tags:
     - ntp

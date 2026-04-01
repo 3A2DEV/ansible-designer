@@ -28,7 +28,8 @@ Read only the files relevant to the requested change.
 Apply the requested change:
 - Preserve all existing fields and structure
 - Use templates from `references/collection.md` for new files
-- All new module/plugin code follows the complete skeleton format
+- All new module/plugin code follows the complete skeleton format from `references/plugins.md`
+- Keep test and usage guidance aligned with `references/testing.md`
 
 ### Step 4 — Show Unified Diff (per file)
 For each modified or created file, show the diff:

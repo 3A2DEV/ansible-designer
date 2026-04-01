@@ -80,6 +80,7 @@ Summary: <X> critical, <Y> warnings, <Z> info
 | Module missing DOCUMENTATION | A plugin module lacks the DOCUMENTATION constant | `[plugins/modules/<file>] Module is missing DOCUMENTATION block — required for ansible-doc` |
 | Module missing EXAMPLES | A plugin module lacks the EXAMPLES constant | `[plugins/modules/<file>] Module is missing EXAMPLES block` |
 | Module missing RETURN | A plugin module lacks the RETURN constant | `[plugins/modules/<file>] Module is missing RETURN block` |
+| Missing test guidance for plugins | Collection contains plugins but no `ansible-test` or usage guidance | `[tests/] Collection contains plugins but has no clear validation path aligned with references/testing.md` |
 
 ### INFO
 

@@ -8,6 +8,8 @@ Demonstrates developing and consuming a local Ansible collection (`myorg.infra`)
 - FQCN usage: `myorg.infra.baseline` (role) and `myorg.infra.sysctl_validate` (module)
 - Custom module skeleton (`plugins/modules/sysctl_validate.py`) with DOCUMENTATION, EXAMPLES, RETURN
 - `pre_tasks` / `post_tasks` wrapping a role for validation gates
+- collection metadata and test layout compatible with `ansible-test`
+- plugin examples beyond a module: filter and lookup plugins
 
 ## Structure
 
@@ -26,14 +28,20 @@ local-collection/
                 ├── galaxy.yml
                 ├── README.md
                 ├── CHANGELOG.md
+                ├── meta/runtime.yml
+                ├── playbooks/site.yml
                 ├── roles/
                 │   └── baseline/        # RHEL baseline: packages, sysctl, limits
                 │       ├── defaults/main.yml
                 │       ├── tasks/main.yml
                 │       └── meta/main.yml
                 └── plugins/
-                    └── modules/
-                        └── sysctl_validate.py
+                    ├── modules/
+                    │   └── sysctl_validate.py
+                    ├── filter/
+                    │   └── sysctl_filters.py
+                    └── lookup/
+                        └── policy_value.py
 ```
 
 ## Usage
@@ -58,5 +66,4 @@ ansible-test sanity --docker default -v
 ## Requirements
 
 - ansible-core >= 2.15
-- `ansible.posix` collection (for `sysctl` and `pam_limits`)
-- `community.general` collection (for `pam_limits`)
+- local collection path configured via `collections_path = ./collections`

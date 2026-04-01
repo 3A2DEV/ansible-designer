@@ -44,3 +44,10 @@ role-rhel/
         nginx_port: 80
         nginx_enable_ssl: false
 ```
+
+## Validation
+
+```bash
+ansible-playbook -i roles/nginx/tests/inventory roles/nginx/tests/test.yml --syntax-check
+ansible-lint roles/nginx
+```

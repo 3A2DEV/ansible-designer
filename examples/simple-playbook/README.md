@@ -9,9 +9,13 @@ simple-playbook/
 ├── site.yml                      # Main site playbook
 ├── inventory/
 │   └── hosts.yml                 # YAML inventory: webservers, databases, loadbalancers
-└── group_vars/
-    ├── all.yml                   # Variables for all hosts
-    └── webservers.yml            # nginx and app variables for webservers group
+├── group_vars/
+│   ├── all.yml                   # Variables for all hosts
+│   └── webservers.yml            # nginx and app variables for webservers group
+└── roles/
+    ├── common/                   # lightweight baseline role for the example
+    ├── nginx/                    # example web role
+    └── postgres/                 # example database role
 ```
 
 ## What it demonstrates
@@ -40,9 +44,14 @@ ansible-playbook -i inventory/ site.yml --check --diff
 ansible-playbook -i inventory/ site.yml --limit web01
 ```
 
-## Roles expected
+## Validation
 
-This playbook references three roles that must exist in `./roles/` or be available via `roles_path`:
-- `common` — baseline packages, NTP, timezone
-- `nginx` — web server installation and configuration
-- `postgres` — PostgreSQL installation and configuration
+```bash
+ansible-playbook -i inventory/hosts.yml site.yml --syntax-check
+ansible-lint .
+ansible-playbook -i inventory/hosts.yml site.yml --check --tags validate
+```
+
+## Included roles
+
+This example now includes lightweight `common`, `nginx`, and `postgres` roles under `./roles/` so the playbook can be syntax-checked without relying on external content.

@@ -1,0 +1,30 @@
+---
+- name: Assert web role inputs are valid
+  ansible.builtin.assert:
+    that:
+      - nginx_port | int > 0
+      - nginx_port | int < 65536
+    fail_msg: "nginx_port must be a valid TCP port"
+  tags:
+    - nginx
+    - validate
+
+- name: Render example web configuration
+  ansible.builtin.copy:
+    dest: /tmp/example-nginx.conf
+    content: |
+      server {
+        listen {{ nginx_port }};
+        root {{ app_static_dir }};
+      }
+    mode: "0644"
+  tags:
+    - nginx
+    - configure
+
+- name: Report example web role state
+  ansible.builtin.debug:
+    msg: "Example nginx role would serve {{ app_static_dir }} on port {{ nginx_port }}"
+  tags:
+    - nginx
+    - service

@@ -29,8 +29,9 @@ Apply the requested change to the relevant files:
 - Preserve existing structure, indentation style, and comments
 - All modules use FQCN
 - All new tasks have tags (role_name + action category)
-- `no_log: true` on any new task handling secrets
+- `no_log: true` on any new task handling secrets per `references/security_vault.md`
 - Use templates from `references/role.md` for any new blocks
+- Keep tests and smoke-playbook updates aligned with `references/testing.md`
 
 ### Step 4 — Show Unified Diff (per file)
 For each modified file, show the diff:

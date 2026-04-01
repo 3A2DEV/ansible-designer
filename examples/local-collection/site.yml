@@ -18,9 +18,6 @@
   become: true
   become_method: ansible.builtin.sudo
 
-  collections:
-    - myorg.infra
-
   vars:
     baseline_manage_firewall: false
 

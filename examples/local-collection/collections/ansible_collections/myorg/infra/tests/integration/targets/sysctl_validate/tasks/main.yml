@@ -1,0 +1,19 @@
+---
+- name: Create policy file for integration test
+  ansible.builtin.copy:
+    dest: /tmp/sysctl_policy.yml
+    content: |
+      kernel.dmesg_restrict: "1"
+    mode: "0644"
+
+- name: Run sysctl_validate module
+  myorg.infra.sysctl_validate:
+    policy_file: /tmp/sysctl_policy.yml
+    fail_on_violation: false
+  register: sysctl_validate_result
+
+- name: Assert module returned expected fields
+  ansible.builtin.assert:
+    that:
+      - sysctl_validate_result.checked == 1
+      - sysctl_validate_result.compliant is defined

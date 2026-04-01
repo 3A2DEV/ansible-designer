@@ -68,6 +68,7 @@ Use the appropriate profile from `references/ansible_cfg.md`:
 
 **All non-default values must have an inline comment explaining why.**
 **Security-sensitive settings (host_key_checking=False) must have a justification comment.**
+**Any vault guidance must stay aligned with `references/security_vault.md`.**
 
 ### Step 5 — Final Output
 Show file path:
@@ -87,7 +88,7 @@ Next step: Validate with `ansible --version` to confirm the config is loaded
 
 Every generated ansible.cfg must include all of these sections, populated with environment-appropriate values:
 
-1. `[defaults]` — inventory, remote_user, private_key_file, host_key_checking, forks, timeout, log_path, roles_path, collections_paths, retry_files_enabled, stdout_callback, callbacks_enabled, gathering, fact_caching, fact_caching_connection, fact_caching_timeout, error_on_undefined_vars
+1. `[defaults]` — inventory, remote_user, private_key_file, host_key_checking, forks, timeout, log_path, roles_path, collections_path, retry_files_enabled, stdout_callback, callbacks_enabled, gathering, fact_caching, fact_caching_connection, fact_caching_timeout, error_on_undefined_vars
 2. `[diff]` — always, context
 3. `[privilege_escalation]` — become, become_method, become_user, become_ask_pass
 4. `[ssh_connection]` — pipelining, control_path, control_master, control_persist, ssh_args

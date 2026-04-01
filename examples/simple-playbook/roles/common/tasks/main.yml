@@ -1,0 +1,26 @@
+---
+- name: Install baseline packages
+  ansible.builtin.package:
+    name: "{{ common_packages }}"
+    state: present
+  tags:
+    - common
+    - install
+
+- name: Record target timezone for the example
+  ansible.builtin.copy:
+    dest: /tmp/example-timezone.txt
+    content: "{{ common_timezone }}\n"
+    mode: "0644"
+  tags:
+    - common
+    - configure
+
+- name: Assert baseline package list is defined
+  ansible.builtin.assert:
+    that:
+      - common_packages | length > 0
+    fail_msg: "common_packages must define at least one package"
+  tags:
+    - common
+    - validate

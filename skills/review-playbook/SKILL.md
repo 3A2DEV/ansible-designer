@@ -81,6 +81,7 @@ If there are no issues in a severity level, show: `No issues found.`
 | Missing playbook header | No YAML comment header with author/version | `Playbook is missing a documentation header (author, version, description)` |
 | No pre_tasks assertion | First play has no version/OS assertion | `Consider adding an ansible.builtin.assert in pre_tasks to verify minimum Ansible version or OS compatibility` |
 | No post_tasks validation | Play has roles but no validation post_task | `Consider adding a validation post_task (wait_for, uri) to confirm deployment success` |
+| No documented validation path | Example-style playbook has no clear validation task or surrounding test guidance | `Consider adding validation tasks or README guidance aligned with references/testing.md` |
 | Long play without serial | Play targeting more than one group without `serial:` | `Play '<name>' targets multiple host groups without serial — consider serial: 1 for rolling updates` |
 | Hard-coded IP addresses | Any IP address literal in the playbook | `[tasks:<line>] Hard-coded IP address '{{ ip }}' — use inventory variables or DNS names instead` |
 

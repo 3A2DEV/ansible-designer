@@ -1,0 +1,5 @@
+---
+app_environment: production
+app_db_user: appuser
+app_db_password: "{{ vault_app_db_password }}"
+app_api_token: "{{ vault_app_api_token }}"

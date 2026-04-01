@@ -49,7 +49,6 @@
       ansible.builtin.assert:
         that: "'curl' in ansible_facts.packages"
         fail_msg: "Baseline package 'curl' was not installed by the common role"
-      ignore_errors: true
       tags: [common, validate]
 
 - name: Configure web servers
