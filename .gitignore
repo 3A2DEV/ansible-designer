@@ -3,7 +3,6 @@ PROJECT.md
 AGENTS.md
 .codex/
 CLAUDE.md
-!tests/fixtures/**/CLAUDE.md
 .claude/
 QWEN.md
 .qwen/

@@ -2,7 +2,42 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Ansible](https://img.shields.io/badge/ansible--core-2.15%2B-red.svg)](https://docs.ansible.com/)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-SKILL-orange.svg)](https://claude.ai/code)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-SKILL-orange.svg)](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+
+```
+ ▐▛███▜▌   Claude Code
+▝▜█████▛▘  Sonnet 4.6 · Claude
+  ▘▘ ▝▝    ansible-designer/
+  ⎿  SessionStart:startup says: [ansible-designer]
+     ──────────────────────────────────────────────────────────
+
+ █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗         
+██╔══██╗████╗  ██║██╔════╝██║██╔══██╗██║     ██╔════╝         
+███████║██╔██╗ ██║███████╗██║██████╔╝██║     █████╗           
+██╔══██║██║╚██╗██║╚════██║██║██╔══██╗██║     ██╔══╝           
+██║  ██║██║ ╚████║███████║██║██████╔╝███████╗███████╗         
+╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝         
+                                                              
+██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗███████╗██████╗ 
+██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║██╔════╝██╔══██╗
+██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║█████╗  ██████╔╝
+██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║██╔══╝  ██╔══██╗
+██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║███████╗██║  ██║
+╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+
+───────────────────────────────────────────────────────────────
+❯ /ansible-designer
+───────────────────────────────────────────────────────────────
+  /ansible-designer:new-playbook
+  /ansible-designer:review-playbook
+  /ansible-designer:update-playbook
+  /ansible-designer:new-role
+  /ansible-designer:review-role
+  /ansible-designer:update-role
+  /ansible-designer:new-collection
+  /ansible-designer:review-collection
+  /ansible-designer:update-collection
+```
 
 AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and `ansible.cfg` files following ansible-core 2.15+ conventions and production best practices.
 

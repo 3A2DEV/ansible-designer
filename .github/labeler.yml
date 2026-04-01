@@ -59,3 +59,4 @@ docs:
     - README.md
     - CONTRIBUTING.md
     - CHANGELOG.md
+    - docs/**
