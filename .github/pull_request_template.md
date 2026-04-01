@@ -8,7 +8,12 @@
 ##### ISSUE TYPE
 <!--- Pick one or more below and delete the rest.
       'Test Pull Request' is for PRs that add/extend tests without code changes. -->
+- Bugfix Pull Request
+- Docs Pull Request
+- Feature Pull Request
+- New Sub-skill Request
 - Refactoring Pull Request
+- Test Pull Request
 
 ##### COMPONENT NAME
 <!--- Write the NAME/PATH/STRUCTURE of the skill component below. -->
