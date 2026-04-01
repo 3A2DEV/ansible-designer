@@ -76,7 +76,7 @@ Then ask: **"Apply these changes? (yes/no)"**
 ### Step 6 — Final Output
 Show file tree of the updated role:
 ```bash
-find roles/<role_name> -type f | sort
+find "roles/<role_name>" -type f | sort
 ```
 
 Suggest next step:

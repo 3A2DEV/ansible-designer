@@ -1,6 +1,6 @@
 ---
 name: ansible-designer
-description: "AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices. Sub-commands: new-playbook, review-playbook, update-playbook, new-role, review-role, update-role, new-collection, review-collection, update-collection, new-conf, review-conf, update-conf. Requires bash_tool. Runs discovery (CLAUDE.md to ansible.cfg to README to filesystem) at the start of every command."
+description: "AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices. Sub-commands: new-playbook, review-playbook, update-playbook, new-role, review-role, update-role, new-collection, review-collection, update-collection, new-conf, review-conf, update-conf. Runs discovery (CLAUDE.md to ansible.cfg to README to filesystem) at the start of every command."
 ---
 
 # ansible-designer
@@ -59,7 +59,7 @@ Every sub-command enforces these rules without exception:
 
 7. **update always diffs** — `update-*` commands read the existing file, compute the change, show a unified diff, and wait for explicit confirmation before writing a single byte.
 
-8. **Show file tree after writes** — After any write operation, run `find <path> -type f | sort` and display the resulting file tree.
+8. **Show file tree after writes** — After any write operation, list all created or modified files and display the resulting file tree.
 
 9. **Testing-aware output** — New or updated examples must include a realistic validation path. See `references/testing.md`.
 
@@ -123,14 +123,6 @@ Suggest: "Next step: [specific actionable suggestion]"
 
 ## Installation
 
-**Recommended — Claude Code Marketplace (namespaced, verified):**
-Install via the Claude Code marketplace from `3A2DEV/ansible-designer`. This path preserves the `ansible-designer:` namespace prefix and installs from a pinned, signed release.
-
-**Alternative — npx skills CLI:**
-```bash
-npx skills add 3A2DEV/ansible-designer -a claude-code
-```
-> **Security note:** This command pulls the latest unpinned version from the registry.
-> Verify the source at https://github.com/3A2DEV/ansible-designer before running in sensitive environments.
+Install via the Claude Code marketplace from `3A2DEV/ansible-designer`. This preserves the `ansible-designer:` namespace prefix for all sub-commands.
 
 Requires Claude Code.

@@ -75,7 +75,7 @@ Then ask: **"Apply this change? (yes/no)"**
 ### Step 6 — Final Output
 Show the updated file tree:
 ```bash
-find <playbook_dir> -type f | sort
+find "<playbook_dir>" -type f | sort
 ```
 
 Suggest next step:

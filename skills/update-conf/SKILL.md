@@ -56,9 +56,9 @@ Apply the requested change:
  forks                 = 10
  timeout               = 30
 +
-+# Fact caching: redis (shared across controller nodes)
++# Fact caching: redis (shared across controller nodes; configure auth via REDIS_URL or vault)
 +fact_caching          = redis
-+fact_caching_connection = redis://localhost:6379/0
++fact_caching_connection = redis://:{{ vault_redis_password }}@cache.internal:6379/0
 +fact_caching_timeout  = 86400
 ```
 

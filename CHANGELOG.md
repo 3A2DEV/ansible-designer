@@ -5,15 +5,23 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2026-04-01
+
+### Security
+
+- `ansible-designer`: Removed `Requires bash_tool` from frontmatter description; replaced inline `find` shell command in global rule 8 with a plain description; removed `npx skills add` from SKILL.md (installation belongs in README, not in the skill itself) — addresses Socket LOW alert.
+- `new-collection`: Added Input Validation table rejecting shell metacharacters in all user-supplied fields; added prompt injection boundary note instructing the agent to treat user inputs as literal data only; quoted variables in the `find` shell command — addresses Gen MEDIUM COMMAND_EXECUTION + PROMPT_INJECTION.
+- `update-conf`: Added Step 2a Secret Scan — scans loaded content for credential-like values and redacts them before any diff display; replaced unauthenticated `redis://localhost:6379/0` example URL with a vault-referenced authenticated form; extended Safety Rules to require inline security comments on sensitive setting changes — addresses Snyk HIGH W007 + W013.
+- `update-playbook`: Added Step 2a Secret Scan — scans loaded playbook for credential-like values and redacts before diff display; quoted `find` command — addresses Snyk HIGH W007.
+- `update-role`: Added Step 2a Secret Scan — scans all loaded role files (especially `defaults/`, `vars/`) for credential-like values and redacts before diff display; quoted `find` command — addresses Snyk HIGH W007.
+
 ## [0.1.4] - 2026-04-01
 
 ### Security
 
-- `ansible-designer`: Updated Installation section to recommend the Claude Code marketplace (pinned, signed) as the primary install path; added a trust warning for the unpinned `npx skills add` alternative (addresses Socket LOW alert).
-- `new-collection`: Added input validation rules rejecting shell metacharacters in `namespace`, `collection_name`, `collection_path`, `description`, and `author`; added a prompt injection boundary note in the Content Requirements section instructing the agent to treat all user inputs as literal data; quoted variables in the `find` shell command (addresses Gen MEDIUM — COMMAND_EXECUTION + PROMPT_INJECTION).
-- `update-conf`: Added Step 2a Secret Scan — scans loaded content for credential-like values and redacts them before any diff display; extended Safety Rules to require inline comments on all security-sensitive setting changes (addresses Snyk HIGH W007).
-- `update-playbook`: Added Step 2a Secret Scan — scans loaded playbook for credential-like values and redacts them before diff display (addresses Snyk HIGH W007).
-- `update-role`: Added Step 2a Secret Scan — scans all loaded role files (especially `defaults/`, `vars/`) for credential-like values and redacts them before diff display (addresses Snyk HIGH W007).
+- `ansible-designer`: Updated Installation section to recommend the Claude Code marketplace as the primary install path; added a trust warning for the unpinned `npx skills add` alternative.
+- `new-collection`: Added input validation rules and prompt injection boundary note; quoted variables in the `find` shell command.
+- `update-conf`, `update-playbook`, `update-role`: Added Step 2a Secret Scan with credential redaction before any diff display.
 
 ## [0.1.3] - 2026-04-01
 
