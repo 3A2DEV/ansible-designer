@@ -1,0 +1,33 @@
+{
+  "name": "3A2DEV",
+  "id": "3A2DEV",
+  "owner": {
+    "name": "NomakCooper"
+  },
+  "metadata": {
+    "description": "Ansible Designer — AI-assisted Ansible authoring toolkit for Claude Code",
+    "homepage": "https://github.com/3A2DEV/ansible-designer"
+  },
+  "plugins": [
+    {
+      "name": "ansible-designer",
+      "source": "./",
+      "description": "AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and ansible.cfg files following production best practices.",
+      "version": "0.1.2",
+      "author": {
+        "name": "NomakCooper"
+      },
+      "keywords": [
+        "ansible",
+        "claude-code",
+        "skill",
+        "playbook",
+        "role",
+        "collection",
+        "automation",
+        "infrastructure-as-code"
+      ],
+      "category": "development"
+    }
+  ]
+}

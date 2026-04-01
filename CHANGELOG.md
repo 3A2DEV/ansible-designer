@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Added `.claude-plugin/plugin.json` — the required plugin manifest for the Claude Code plugin system.
-  Without it, `npx skills add` only installs the root skill and cannot namespace sub-commands;
-  sub-commands like `/ansible-designer:review-playbook` would return "Unknown skill" on fresh installs.
+- Added `.claude-plugin/marketplace.json` — required for Claude Code's native plugin system to
+  discover the repo as an installable marketplace. Without it, the plugin system cannot find
+  `ansible-designer` and sub-commands are not namespaced correctly.
+- Added `.claude-plugin/plugin.json` — plugin manifest that defines the `ansible-designer` namespace
+  used for all sub-command skill identifiers (`ansible-designer:review-playbook`, etc.).
+- Updated README install instructions: native plugin system (via `extraKnownMarketplaces`) is now
+  documented as the recommended path; `npx skills add` is noted as a bare fallback without namespacing.
 
 ## [0.1.1] - 2026-04-01
 
