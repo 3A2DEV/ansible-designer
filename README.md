@@ -31,15 +31,6 @@
 ───────────────────────────────────────────────────────────────
 ❯ /ansible-designer
 ───────────────────────────────────────────────────────────────
-  /ansible-designer:new-playbook
-  /ansible-designer:review-playbook
-  /ansible-designer:update-playbook
-  /ansible-designer:new-role
-  /ansible-designer:review-role
-  /ansible-designer:update-role
-  /ansible-designer:new-collection
-  /ansible-designer:review-collection
-  /ansible-designer:update-collection
 ```
 
 AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and updates playbooks, roles, collections, and `ansible.cfg` files following ansible-core 2.15+ conventions and production best practices.
@@ -50,22 +41,18 @@ AI-assisted Ansible authoring toolkit for Claude Code. Scaffolds, reviews, and u
 
 ### Option A — Claude Code plugin system (recommended)
 
-Add the marketplace to `~/.claude/settings.json`, then install the plugin from the Claude Code UI:
+Using Claude Code:
 
-```json
-{
-  "extraKnownMarketplaces": {
-    "3A2DEV": {
-      "source": {
-        "source": "github",
-        "repo": "3A2DEV/ansible-designer"
-      }
-    }
-  }
-}
+```bash
+───────────────────────────────────────────────────────────────
+❯ /plugin marketplace add 3A2DEV/ansible-designer
+───────────────────────────────────────────────────────────────
 ```
-
-Once added, open Claude Code → Plugins → find **ansible-designer** under the **3A2DEV** marketplace → Install.
+```bash
+───────────────────────────────────────────────────────────────
+❯ /plugin install ansible-designer
+───────────────────────────────────────────────────────────────
+```
 
 ### Option B — npx skills (bare install, sub-commands not namespaced)
 
