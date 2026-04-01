@@ -1,6 +1,6 @@
 ---
 name: update-role
-description: Update an existing Ansible role. Triggered by /ansible-designer:update-role. Reads specific role files, applies the requested change following all global rules (FQCN, tags, no_log), shows a unified diff per file, waits for explicit user confirmation, then writes. Never overwrites silently.
+description: Update an existing Ansible role. Triggered by /ansible-designer:update-role (marketplace) or /update-role (npx). Reads specific role files, applies the requested change following all global rules (FQCN, tags, no_log), shows a unified diff per file, waits for explicit user confirmation, then writes. Never overwrites silently.
 ---
 
 # update-role

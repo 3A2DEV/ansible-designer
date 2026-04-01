@@ -5,6 +5,13 @@ All notable changes to ansible-designer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2026-04-02
+
+### Changed
+
+- `ansible-designer` (root): Replaced the Available Commands table with a two-column table showing both the marketplace form (`/ansible-designer:<sub-command>`) and the npx form (`/<sub-command>`); added a "Command Names by Install Path" section explaining the namespace difference between the two install paths.
+- All 12 sub-skills: Updated frontmatter `description` to mention both trigger forms — `Triggered by /ansible-designer:X (marketplace) or /X (npx)`.
+
 ## [0.1.5] - 2026-04-01
 
 ### Security

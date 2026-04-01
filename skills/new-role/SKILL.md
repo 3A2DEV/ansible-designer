@@ -1,6 +1,6 @@
 ---
 name: new-role
-description: Scaffold a complete Ansible role. Triggered by /ansible-designer:new-role. Resolves role location from FQCN or path, asks whether multi-OS support is needed (RHEL, Solaris, Windows/WinRM), and generates a full role directory structure with realistic starter tasks, handlers, defaults, meta/main.yml, and OS-specific var files if requested. Shows summary before writing.
+description: Scaffold a complete Ansible role. Triggered by /ansible-designer:new-role (marketplace) or /new-role (npx). Resolves role location from FQCN or path, asks whether multi-OS support is needed (RHEL, Solaris, Windows/WinRM), and generates a full role directory structure with realistic starter tasks, handlers, defaults, meta/main.yml, and OS-specific var files if requested. Shows summary before writing.
 ---
 
 # new-role

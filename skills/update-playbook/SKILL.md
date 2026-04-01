@@ -1,6 +1,6 @@
 ---
 name: update-playbook
-description: Update an existing Ansible playbook. Triggered by /ansible-designer:update-playbook. Reads the target file, applies the requested change following all global rules (FQCN, tags, no_log), shows a unified diff, waits for explicit user confirmation, then writes. Never overwrites silently.
+description: Update an existing Ansible playbook. Triggered by /ansible-designer:update-playbook (marketplace) or /update-playbook (npx). Reads the target file, applies the requested change following all global rules (FQCN, tags, no_log), shows a unified diff, waits for explicit user confirmation, then writes. Never overwrites silently.
 ---
 
 # update-playbook

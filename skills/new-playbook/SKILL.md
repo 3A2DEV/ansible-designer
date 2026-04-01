@@ -1,6 +1,6 @@
 ---
 name: new-playbook
-description: Create a new Ansible playbook. Triggered by /ansible-designer:new-playbook. Runs discovery to find existing roles and collections, then collects path, filename, target hosts/groups, and roles to include. Generates a complete playbook with header, vars block, pre/post tasks, roles section, error handling, and tags. Shows summary before writing. Never overwrites existing files without confirmation.
+description: Create a new Ansible playbook. Triggered by /ansible-designer:new-playbook (marketplace) or /new-playbook (npx). Runs discovery to find existing roles and collections, then collects path, filename, target hosts/groups, and roles to include. Generates a complete playbook with header, vars block, pre/post tasks, roles section, error handling, and tags. Shows summary before writing. Never overwrites existing files without confirmation.
 ---
 
 # new-playbook
